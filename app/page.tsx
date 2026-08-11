@@ -1,10 +1,12 @@
-import { ArrowDown, ArrowRight, Code2, Mail, PenTool, Send, Wrench } from "lucide-react";
+import { ArrowDown, ArrowRight, Code2, PenTool, Send, Wrench } from "lucide-react";
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa6";
 import { SiGithub } from "react-icons/si";
 import { projects } from "../data/projects";
 import ContactForm from "./components/ContactForm";
-import ThemeToggle from "./components/ThemeToggle";
+import ProjectGrid from "./components/ProjectGrid";
+import SiteFooter from "./components/SiteFooter";
+import SiteHeader from "./components/SiteHeader";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -24,27 +26,9 @@ const heroSocialLinks = [
 export default function Home() {
   return (
     <main>
-      <header className="header">
-        <div className="header-inner shell">
-          <a className="brand" href="#top" aria-label="Início">
-            <span>LD</span>
-            <strong>
-              Leonardo Dariva<small>UI/UX Designer & Front-end Developer</small>
-            </strong>
-          </a>
-          <nav aria-label="Navegação principal">
-            <a href="#top">Início</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#skills">Skills</a>
-            <a href="#contato">Contato</a>
-            <a href="/curriculo">Currículo</a>
-          </nav>
-          <ThemeToggle />
-        </div>
-      </header>
+      <SiteHeader />
 
-      <section className="hero shell" id="top">
+      <section className="hero shell" id="inicio">
         <div className="hero-layout">
           <div className="hero-copy">
             <div className="eyebrow">
@@ -162,34 +146,7 @@ export default function Home() {
             Ver todos os projetos <ArrowRight aria-hidden="true" size={14} />
           </Link>
         </div>
-        <div className="work-grid">
-          {projects.map((project) => (
-            <article className="card" key={project.slug}>
-              <div className={`card-image ${project.cover.tone}`}>
-                <span>{project.number}</span>
-                <div className="mini-ui">
-                  <i />
-                  <b />
-                  <b />
-                  <b />
-                </div>
-                <small>{project.cover.label}</small>
-              </div>
-              <div className="card-meta">
-                <span>{project.category}</span>
-                <span>{project.number} / {String(projects.length).padStart(2, "0")}</span>
-              </div>
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="card-foot">
-                <span>{project.technologies.join(" · ")}</span>
-                <Link className="card-link" href={`/projetos/${project.slug}`}>
-                  Acessar projeto
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ProjectGrid projects={projects} />
       </section>
 
       <section className="skills shell" id="skills">
@@ -280,26 +237,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <footer className="site-footer">
-        <div className="shell">
-          <div className="site-footer-main">
-            <strong className="site-footer-brand">
-              Leonardo Dariva<small>UI/UX Designer & Front-end Developer</small>
-            </strong>
-            <p className="site-footer-copyright">
-              © 2026 Leonardo Dariva. Todos os direitos reservados.
-            </p>
-            <a
-              className="footer-email-link"
-              href="mailto:leodarivask@gmail.com?subject=Contato%20pelo%20portf%C3%B3lio"
-              aria-label="Enviar e-mail para Leonardo Dariva"
-              title="Enviar e-mail"
-            >
-              <Mail aria-hidden="true" size={17} />
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
