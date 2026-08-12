@@ -9,7 +9,7 @@ export default function SiteHeader({ currentPage = "home" }: SiteHeaderProps) {
   const isHome = currentPage === "home";
   const navigation = [
     { label: "Início", href: isHome ? "#inicio" : "/#inicio" },
-    { label: "Projetos", href: isHome ? "#projetos" : "/projetos" },
+    { label: "Projetos", href: "/projetos" },
     { label: "Sobre", href: isHome ? "#sobre" : "/#sobre" },
     { label: "Skills", href: isHome ? "#skills" : "/#skills" },
     { label: "Contato", href: isHome ? "#contato" : "/#contato" },

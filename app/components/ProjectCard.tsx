@@ -28,7 +28,7 @@ export default function ProjectCard({ project, total }: ProjectCardProps) {
       <div className="card-foot">
         <span>{project.technologies.join(" · ")}</span>
         <Link className="card-link" href={`/projetos/${project.slug}`}>
-          Acessar projeto
+          Acessar
         </Link>
       </div>
     </article>
