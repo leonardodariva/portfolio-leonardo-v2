@@ -1,4 +1,216 @@
-import InternalHeader from "../components/InternalHeader";
-import InternalFooter from "../components/InternalFooter";
+import type { Metadata } from "next";
+import {
+  BriefcaseBusiness,
+  Code2,
+  Download,
+  GraduationCap,
+  MessageSquare,
+  UserRound,
+} from "lucide-react";
+import SiteFooter from "../components/SiteFooter";
+import SiteHeader from "../components/SiteHeader";
 
-export default function Curriculo(){return <main><InternalHeader/><section className="resume-hero shell"><span>CURRÍCULO / RESUMO PROFISSIONAL</span><h1>Design, experiência<br/><em>e desenvolvimento.</em></h1><div className="resume-intro"><p>Sou Leonardo Dariva, UI/UX Designer & Front-end Developer. Uno pensamento centrado no usuário, clareza visual e conhecimento técnico para criar experiências digitais funcionais e bem construídas.</p><a className="download disabled" href="#download" aria-label="Currículo em PDF — disponível em breve">Baixar currículo em PDF <b>↓</b></a></div></section><section className="quick-facts shell"><div><span>LOCALIZAÇÃO</span><p>Apucarana — PR, Brasil</p></div><div><span>ATUAÇÃO</span><p>UI/UX Design · Front-end</p></div><div><span>MODELO</span><p>Remoto · Placeholder</p></div><div><span>CONTATO</span><p>seuemail@exemplo.com</p></div></section><section className="resume-section shell"><aside><span>01 / PERFIL</span></aside><div><h2>Entre a estratégia<br/>e a execução.</h2><p className="lead">Minha atuação conecta a compreensão do problema, a criação da experiência e a implementação da interface.</p><p>Este espaço receberá uma apresentação definitiva sobre sua trajetória, seus diferenciais e o tipo de oportunidade que você procura.</p></div></section><section className="resume-section shell"><aside><span>02 / EXPERIÊNCIA</span></aside><div className="timeline"><article><time>PERÍODO</time><div><h3>Cargo ou atuação profissional</h3><span>Empresa / projeto</span><p>Resumo das responsabilidades, contribuições e competências desenvolvidas. Conteúdo aguardando suas informações.</p></div></article><article><time>PERÍODO</time><div><h3>Cargo ou atuação profissional</h3><span>Empresa / projeto</span><p>Resumo das responsabilidades, contribuições e competências desenvolvidas. Conteúdo aguardando suas informações.</p></div></article></div></section><section className="resume-section shell"><aside><span>03 / FORMAÇÃO</span></aside><div className="timeline"><article><time>ANO</time><div><h3>Formação ou curso</h3><span>Instituição</span><p>Informações sobre formação acadêmica, cursos e certificações relevantes.</p></div></article></div></section><section className="resume-section shell"><aside><span>04 / COMPETÊNCIAS</span></aside><div className="resume-skills"><div><span>DESIGN</span><p>UI Design · UX Research · Wireframes · Prototipação · Design Systems</p></div><div><span>DEVELOPMENT</span><p>HTML · CSS · JavaScript · TypeScript · React · Responsividade</p></div><div><span>TOOLS</span><p>Figma · VS Code · Git · GitHub · Adobe Creative Suite</p></div></div></section><section className="download-block shell" id="download"><span>VERSÃO EM PDF</span><h2>Tenha meu currículo<br/>sempre à mão.</h2><p>O arquivo definitivo será adicionado depois que revisarmos suas experiências, formação e informações de contato.</p><button disabled>PDF em preparação ↓</button></section><InternalFooter/></main>}
+export const metadata: Metadata = {
+  title: "Currículo | Leonardo Dariva",
+  description:
+    "Currículo profissional de Leonardo Dariva, UI/UX Designer e Front-end Developer.",
+};
+
+const professionalSummary =
+  "UI/UX Designer & Front-end Developer com foco em transformar problemas complexos em experiências digitais claras, funcionais e centradas nas pessoas. Combino pensamento de produto, design de interfaces e desenvolvimento front-end para criar soluções consistentes, acessíveis e bem estruturadas.";
+
+const professionalPhone: string | null = null;
+
+const resumeSkillGroups = [
+  {
+    label: "Design & UI/UX",
+    items: [
+      "UI Design",
+      "UX Research",
+      "Arquitetura da Informação",
+      "Wireframing",
+      "Prototipação",
+      "Design Systems",
+      "Acessibilidade",
+    ],
+  },
+  {
+    label: "Front-end",
+    items: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Responsive Design",
+      "Componentização",
+    ],
+  },
+  {
+    label: "Ferramentas",
+    items: [
+      "Figma",
+      "VS Code",
+      "Adobe XD",
+      "GitHub",
+      "Adobe Creative Suite",
+      "DevTools",
+    ],
+  },
+];
+
+const professionalSkills = [
+  {
+    title: "Comunicação clara",
+    description:
+      "Capacidade de traduzir necessidades, ideias e decisões de produto em soluções compreensíveis.",
+  },
+  {
+    title: "Pensamento centrado no usuário",
+    description:
+      "Atenção ao contexto, à usabilidade e à clareza em cada etapa da experiência.",
+  },
+  {
+    title: "Colaboração",
+    description:
+      "Facilidade para trabalhar em conjunto com clientes, times criativos e desenvolvimento.",
+  },
+  {
+    title: "Aprendizado contínuo",
+    description:
+      "Interesse constante em aprimorar repertório de design, tecnologia e produtos digitais.",
+  },
+];
+
+export default function Curriculo() {
+  return (
+    <main className="resume-main">
+      <SiteHeader currentPage="resume" />
+
+      <header className="resume-hero shell">
+        <div className="resume-hero-layout">
+          <div className="resume-identity">
+            <h1>Leonardo Dariva</h1>
+            <p className="resume-role">
+              UI/UX Designer &amp; Front-end Developer
+            </p>
+            <div
+              className="resume-contact-line"
+              aria-label="Informações de contato"
+            >
+              <span>Apucarana, Paraná</span>
+              <a>leodarivask@gmail.com</a>
+              {professionalPhone ? (
+                <a href={`tel:${professionalPhone}`}>{professionalPhone}</a>
+              ) : (
+                <span>Telefone a adicionar</span>
+              )}
+            </div>
+            <div
+              className="resume-social-links"
+              aria-label="Perfis profissionais"
+            >
+              <a
+                href="https://github.com/leonardodariva"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/leonardo-dariva/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <a
+            className="resume-download"
+            href="/curriculo-leonardo-dariva.pdf"
+            download
+          >
+            Baixar currículo <Download aria-hidden="true" size={16} />
+          </a>
+        </div>
+      </header>
+
+      <div className="resume-content shell">
+        <section className="resume-block">
+          <h2 className="resume-panel-title">
+            <span className="resume-section-icon">
+              <UserRound aria-hidden="true" size={19} />
+            </span>
+            Resumo profissional
+          </h2>
+          <p className="resume-summary">{professionalSummary}</p>
+        </section>
+
+        <section className="resume-block">
+          <h2 className="resume-panel-title">
+            <span className="resume-section-icon">
+              <MessageSquare aria-hidden="true" size={19} />
+            </span>
+            Competências profissionais
+          </h2>
+          <div className="resume-professional-grid">
+            {professionalSkills.map((skill) => (
+              <article className="resume-professional-item" key={skill.title}>
+                <h3>{skill.title}</h3>
+                <p>{skill.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="resume-block">
+          <h2 className="resume-panel-title">
+            <span className="resume-section-icon">
+              <BriefcaseBusiness aria-hidden="true" size={19} />
+            </span>
+            Experiência profissional
+          </h2>
+          <div className="resume-record">
+            <p className="resume-status">
+              Experiências profissionais em atualização.
+            </p>
+          </div>
+        </section>
+
+        <section className="resume-block">
+          <h2 className="resume-panel-title">
+            <span className="resume-section-icon">
+              <GraduationCap aria-hidden="true" size={20} />
+            </span>
+            Formação e estudos
+          </h2>
+          <div className="resume-record">
+            <p className="resume-status">
+              Informações de formação em atualização.
+            </p>
+          </div>
+        </section>
+        <section className="resume-block">
+          <h2 className="resume-panel-title">
+            <span className="resume-section-icon">
+              <Code2 aria-hidden="true" size={20} />
+            </span>
+            Competências técnicas
+          </h2>
+          <div className="resume-technical-grid">
+            {resumeSkillGroups.map((group) => (
+              <div className="resume-technical-group" key={group.label}>
+                <h3 className="resume-technical-label">{group.label}</h3>
+                <ul className="resume-technical-list">
+                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+      <SiteFooter />
+    </main>
+  );
+}

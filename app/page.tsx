@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, Code2, PenTool, Send, Wrench } from "lucide-react";
+import { ArrowDown, ArrowRight, Send } from "lucide-react";
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa6";
 import { SiGithub } from "react-icons/si";
@@ -7,6 +7,7 @@ import ContactForm from "./components/ContactForm";
 import ProjectGrid from "./components/ProjectGrid";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
+import TechnicalSkills from "./components/TechnicalSkills";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -153,69 +154,7 @@ export default function Home() {
         <div className="section-head">
           <span>03 / SKILLS</span>
         </div>
-        <div className="skills-grid">
-          <article className="skill-area">
-            <header className="skill-area-head">
-              <div className="skill-category">
-                <span className="skill-icon"><PenTool aria-hidden="true" size={17} /></span>
-                <span>DESIGN &amp; UX</span>
-              </div>
-              <h3>Projetar com clareza.</h3>
-              <p>
-                Entender problemas e projetar experiências claras e funcionais.
-              </p>
-            </header>
-            <ul className="skill-list">
-              <li>UI Design</li>
-              <li>UX Research</li>
-              <li>Arquitetura da Informação</li>
-              <li>Wireframing</li>
-              <li>Prototipação</li>
-              <li>Design Systems</li>
-              <li>Acessibilidade</li>
-            </ul>
-          </article>
-          <article className="skill-area">
-            <header className="skill-area-head">
-              <div className="skill-category">
-                <span className="skill-icon"><Code2 aria-hidden="true" size={17} /></span>
-                <span>FRONT-END</span>
-              </div>
-              <h3>Construir com propósito.</h3>
-              <p>
-                Transformar decisões de design em interfaces responsivas e bem
-                estruturadas.
-              </p>
-            </header>
-            <ul className="skill-list">
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
-              <li>TypeScript</li>
-              <li>React</li>
-              <li>Responsive Design</li>
-              <li>Componentização</li>
-            </ul>
-          </article>
-          <article className="skill-area">
-            <header className="skill-area-head">
-              <div className="skill-category">
-                <span className="skill-icon"><Wrench aria-hidden="true" size={17} /></span>
-                <span>FERRAMENTAS</span>
-              </div>
-              <h3>Dar forma ao processo.</h3>
-              <p>Ferramentas para criar, desenvolver e colaborar com fluidez.</p>
-            </header>
-            <ul className="skill-list">
-              <li>Figma</li>
-              <li>VS Code</li>
-              <li>Git</li>
-              <li>GitHub</li>
-              <li>Adobe Creative Suite</li>
-              <li>DevTools</li>
-            </ul>
-          </article>
-        </div>
+        <TechnicalSkills />
       </section>
       <section className="contact" id="contato">
         <div className="shell">

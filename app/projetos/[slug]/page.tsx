@@ -7,7 +7,7 @@ import {
   projects,
 } from "../../../data/projects";
 import InternalFooter from "../../components/InternalFooter";
-import InternalHeader from "../../components/InternalHeader";
+import SiteHeader from "../../components/SiteHeader";
 
 type CasePageProps = {
   params: Promise<{ slug: string }>;
@@ -48,7 +48,7 @@ export default async function CasePage({ params }: CasePageProps) {
 
   return (
     <main>
-      <InternalHeader />
+      <SiteHeader currentPage="projects" />
       <section className="case-hero shell">
         <Link href="/projetos">← Todos os projetos</Link>
         <div className="case-meta">

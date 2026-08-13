@@ -7,6 +7,7 @@
   --acid: #c7ff3f;
   --purple: #7657ff;
   --error: #b42318;
+  --orange: #ff6f00;
   --contact-surface: #e6e6e6;
   --contact-ink: #101113;
   --contact-muted: #65686d;
@@ -52,6 +53,19 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-sans), Arial, sans-serif;
+}
+.route-transition {
+  animation: route-enter 220ms ease-out both;
+}
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 a {
   color: inherit;
@@ -128,17 +142,28 @@ a {
 nav {
   display: flex;
   gap: 36px;
-  font-size: 13px;
+  font-size: 15px;
+  font-weight: 600;
 }
 nav a {
   color: #5b5e63;
   transition: 0.2s;
 }
-nav a:hover,
-.hero-actions > a:hover {
+.header .nav-link[aria-current="page"] {
+  position: relative;
   color: var(--ink);
 }
-.header nav a[aria-current="page"] {
+.header .nav-link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 2px;
+  background: var(--purple);
+}
+nav a:hover,
+.hero-actions > a:hover {
   color: var(--ink);
 }
 .resume,
@@ -966,6 +991,9 @@ a.secondary-action:focus-visible,
   html {
     scroll-behavior: auto;
   }
+  .route-transition {
+    animation: none;
+  }
   .hero .eyebrow i {
     animation: none;
     box-shadow: 0 0 0 4px color-mix(in srgb, #64c94d 18%, transparent);
@@ -980,7 +1008,6 @@ a.secondary-action:focus-visible,
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: clamp(32px, 4vw, 56px);
-  border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--line);
 }
 .skill-area {
@@ -1006,10 +1033,10 @@ a.secondary-action:focus-visible,
   border-radius: 5px;
   color: var(--ink);
 }
-.skill-area:first-child .skill-icon {
+.skill-icon--purple {
   color: var(--purple);
 }
-.skill-area:nth-child(2) .skill-icon {
+.skill-icon--acid {
   color: var(--acid);
 }
 .skill-area-head h3 {
@@ -1035,6 +1062,31 @@ a.secondary-action:focus-visible,
   font-size: 16px;
 }
 .skill-list li:last-child {
+  border-bottom: 0;
+}
+.resume-technical-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(32px, 4vw, 56px);
+}
+.resume-technical-label {
+  margin: 0;
+  border-left: 2px solid var(--purple);
+  padding-left: 12px;
+  color: var(--muted);
+  font: 500 16px var(--font-mono);
+}
+.resume-technical-list {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.resume-technical-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+}
+.resume-technical-list li:last-child {
   border-bottom: 0;
 }
 .contact {
@@ -1205,6 +1257,7 @@ a.secondary-action:focus-visible,
 .site-footer {
   background: var(--paper);
   color: var(--ink);
+  border-top: 1px solid var(--line);
   padding: 44px 0 30px;
 }
 .site-footer-main {
@@ -1212,8 +1265,6 @@ a.secondary-action:focus-visible,
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 32px;
-  border-top: 1px solid var(--line);
-  padding-top: 30px;
 }
 .site-footer-brand {
   display: flex;
@@ -1490,6 +1541,10 @@ html[data-theme="dark"] .is-scrolled .header {
 }
 
 /* Internal pages */
+.resume-main .resume-hero,
+.resume-main .resume-content {
+  width: min(1040px, calc(100% - 80px));
+}
 .all-projects {
   display: flex;
   justify-content: space-between;
@@ -1499,46 +1554,107 @@ html[data-theme="dark"] .is-scrolled .header {
   font-size: 14px;
 }
 .resume-hero {
-  padding: 110px 0 90px;
-  border-bottom: 1px solid var(--line);
+  padding: 76px 0 5px;
+  /* border-bottom: 1px solid var(--line); */
 }
-.resume-hero > span,
 .case-meta span,
 .case-summary span,
 .case-details article > span,
-.case-next > span,
-.quick-facts span,
-.resume-section aside span,
-.resume-skills span,
-.download-block > span {
+.case-next > span {
   font: 500 10px var(--font-mono);
   letter-spacing: 0.12em;
-  color: #7e8186;
+  color: var(--muted);
+}
+.resume-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 64px;
+  align-items: center;
 }
 .resume-hero h1 {
-  font-size: clamp(62px, 8vw, 110px);
-  line-height: 0.92;
-  letter-spacing: -0.065em;
-  margin: 48px 0 70px;
-}
-.resume-hero h1 em,
-.case-hero h1 em {
-  font-family: Georgia, serif;
-  color: var(--purple);
-  font-weight: 400;
-}
-.resume-intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 100px;
-  align-items: end;
-}
-.resume-intro p {
-  max-width: 650px;
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--muted);
   margin: 0;
+  font-size: clamp(48px, 6vw, 78px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.resume-identity h1 {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 700;
+}
+
+.resume-role {
+  margin: 5px 0 5px;
+  font-size: 20px;
+  color: var(--purple);
+  font-weight: 700;
+}
+.resume-contact-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  /* margin-top: 10px; */
+  font: 500 16px var(--font-mono);
+  color: var(--muted);
+}
+.resume-contact-line > * + *::before {
+  content: "·";
+  margin-right: 10px;
+  color: var(--line);
+}
+.resume-contact-line a,
+.resume-social-links a {
+  padding-bottom: 2px;
+}
+.resume-social-links {
+  display: flex;
+  gap: 22px;
+  margin-top: 10px;
+  font: 600 16px var(--font-mono);
+  color: var(--orange);
+}
+.resume-contact-line a:hover,
+.resume-social-links a:hover {
+  color: var(--purple);
+  border-color: var(--purple);
+}
+.resume-contact-line a:focus-visible,
+.resume-social-links a:focus-visible,
+.resume-download:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+.resume-download {
+  min-height: 46px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  background: var(--acid);
+  color: var(--contact-action-ink);
+  font: 650 13px var(--font-sans);
+  transition: background 0.22s;
+}
+.resume-download:hover {
+  background: color-mix(in srgb, var(--acid) 82%, var(--contact-action-ink));
+}
+.resume-skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 24px 0 0;
+  list-style: none;
+}
+.resume-skill-tag {
+  padding: 7px 9px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--paper) 96%, var(--ink));
+  color: var(--muted);
+  font: 500 11px var(--font-mono);
 }
 .projects-page-hero {
   padding: 48px 0 42px;
@@ -1592,6 +1708,11 @@ html[data-theme="dark"] .is-scrolled .header {
   letter-spacing: -0.075em;
   margin: 28px 0 50px;
 }
+.case-hero h1 em {
+  font-family: Georgia, serif;
+  color: var(--purple);
+  font-weight: 400;
+}
 .case-hero p {
   font-size: 18px;
   line-height: 1.6;
@@ -1642,9 +1763,7 @@ html[data-theme="dark"] .is-scrolled .header {
   border-bottom: 1px solid var(--line);
 }
 .case-summary h2,
-.case-details h2,
-.resume-section h2,
-.download-block h2 {
+.case-details h2 {
   font-size: 52px;
   line-height: 1.02;
   letter-spacing: -0.05em;
@@ -1707,130 +1826,103 @@ html[data-theme="dark"] .is-scrolled .header {
   font: 500 9px var(--font-mono);
   color: var(--muted);
 }
-.resume-intro .download {
-  justify-self: end;
-  background: var(--acid);
-  padding: 18px 22px;
-  display: flex;
-  justify-content: space-between;
-  min-width: 260px;
-  font-size: 13px;
-}
-.quick-facts {
+.resume-content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 30px 0 90px;
+  padding: 40px 0 40px;
 }
-.quick-facts > div {
-  border-right: 1px solid var(--line);
-  padding-right: 24px;
-  margin-right: 24px;
-}
-.quick-facts > div:last-child {
-  border: 0;
-}
-.quick-facts p {
-  font-size: 13px;
-}
-.resume-section {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 80px;
-  padding: 100px 0;
+.resume-block {
+  padding: clamp(44px, 5vw, 64px) 0;
   border-top: 1px solid var(--line);
 }
-.resume-section > div {
-  max-width: 900px;
-}
-.resume-section .lead {
-  font-size: 25px;
-  line-height: 1.45;
-  color: var(--ink);
-  max-width: 730px;
-}
-.resume-section > div > p:not(.lead) {
-  color: #6f7277;
-  line-height: 1.7;
-  max-width: 650px;
-}
-.timeline article {
-  display: grid;
-  grid-template-columns: 170px 1fr;
-  gap: 30px;
-  border-top: 1px solid var(--line);
-  padding: 28px 0 50px;
-}
-.timeline time {
-  font: 500 10px var(--font-mono);
-  color: #8b8e93;
-}
-.timeline h3 {
+.resume-block h2 {
+  margin: 0 0 34px;
   font-size: 24px;
-  margin: 0 0 7px;
+  line-height: 1.25;
+  font-weight: bold;
 }
-.timeline span {
-  font-size: 12px;
+.resume-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.resume-panel-title svg {
+  color: var(--purple);
+  flex: 0 0 auto;
+}
+.resume-section-icon {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 34px;
+  background: transparent;
+}
+.resume-section-icon svg {
   color: var(--purple);
 }
-.timeline p {
-  font-size: 14px;
-  line-height: 1.65;
-  color: #74777c;
-  max-width: 630px;
-}
-.resume-skills > div {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  border-top: 1px solid var(--line);
-  padding: 22px 0;
-}
-.resume-skills p {
+.resume-summary {
+  /* max-width: 780px; */
   margin: 0;
+  color: var(--ink);
+  font-size: 17px;
   line-height: 1.7;
 }
-.download-block {
-  background: var(--ink);
-  color: white;
-  width: min(1280px, calc(100% - 80px));
-  margin: 30px auto 110px;
-  padding: 70px;
+.resume-professional-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px 46px;
 }
-.download-block h2 {
-  font-size: 62px;
+.resume-professional-item,
+.resume-record {
+  border-left: 2px solid var(--purple);
+  padding-left: 20px;
 }
-.download-block p {
-  color: #a1a4a9;
-  max-width: 570px;
-  line-height: 1.7;
+.resume-professional-item h3 {
+  margin: 0 0 15px;
+  font-size: 19px;
+  font-weight: bold;
 }
-.download-block button {
-  margin-top: 35px;
-  background: var(--acid);
-  border: 0;
-  padding: 18px 22px;
-  font: 600 13px var(--font-sans);
-  min-width: 230px;
-  text-align: left;
-  opacity: 0.8;
+.resume-professional-item p {
+  max-width: 520px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.4;
 }
-.disabled {
-  cursor: not-allowed;
+.resume-status {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
 }
 .internal-footer > div > p {
   font: 500 10px var(--font-mono);
   letter-spacing: 0.12em;
 }
 @media (max-width: 800px) {
+  .resume-main .resume-hero,
+  .resume-main .resume-content {
+    width: calc(100% - 36px);
+  }
   .resume-hero {
-    padding: 70px 0 60px;
+    padding: 48px 0 38px;
   }
-  .resume-hero h1 {
-    font-size: 54px;
-    margin: 36px 0 48px;
-  }
-  .resume-intro {
+  .resume-hero-layout {
     grid-template-columns: 1fr;
     gap: 30px;
+  }
+  .resume-hero h1 {
+    font-size: 46px;
+  }
+  .resume-role {
+    margin-top: 9px;
+    font-size: 16px;
+  }
+  .resume-download {
+    width: 100%;
+    justify-content: space-between;
   }
   .projects-page-hero {
     padding: 34px 0 30px;
@@ -1864,9 +1956,7 @@ html[data-theme="dark"] .is-scrolled .header {
     padding: 75px 0;
   }
   .case-summary h2,
-  .case-details h2,
-  .resume-section h2,
-  .download-block h2 {
+  .case-details h2 {
     font-size: 40px;
   }
   .summary-text > p {
@@ -1881,34 +1971,22 @@ html[data-theme="dark"] .is-scrolled .header {
   .case-next > a {
     font-size: 40px;
   }
-  .quick-facts {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    padding-bottom: 60px;
+  .resume-block {
+    padding: 42px 0;
   }
-  .quick-facts > div {
-    border: 0;
+  .resume-block h2 {
+    margin-bottom: 28px;
   }
-  .resume-intro .download {
-    justify-self: start;
-    width: 100%;
+  .resume-content {
+    padding: 48px 0 70px;
   }
-  .resume-section {
+  .resume-summary {
+    font-size: 15px;
+  }
+  .resume-professional-grid,
+  .resume-technical-grid {
     grid-template-columns: 1fr;
-    gap: 38px;
-    padding: 70px 0;
-  }
-  .timeline article {
-    grid-template-columns: 1fr;
-  }
-  .resume-skills > div {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .download-block {
-    width: calc(100% - 36px);
-    padding: 45px 25px;
-    margin-bottom: 70px;
+    gap: 34px;
   }
   .footer-bottom > a {
     justify-self: end;
