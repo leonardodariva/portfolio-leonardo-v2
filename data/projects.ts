@@ -6,16 +6,20 @@ export type Project = {
   category: string;
   title: string;
   description: string;
+  summary?: string;
   technologies: readonly string[];
   cover: {
     tone: ProjectTone;
     label: string;
   };
+  gallery?: string[];
   year: number;
-  challenge?: string;
+  context?: string;
+  role?: string;
   process?: string;
   solution?: string;
-  result?: string;
+  learnings?: string;
+  status?: string;
 };
 
 export const projects: readonly Project[] = [
@@ -29,6 +33,7 @@ export const projects: readonly Project[] = [
     technologies: ["Figma", "Pesquisa", "Prototipação"],
     cover: { tone: "violet", label: "Mockup / Preview" },
     year: 2026,
+    status: "Em desenvolvimento",
   },
   {
     slug: "projeto-02",
@@ -40,6 +45,7 @@ export const projects: readonly Project[] = [
     technologies: ["React", "TypeScript", "CSS"],
     cover: { tone: "blue", label: "Mockup / Preview" },
     year: 2026,
+    status: "Em desenvolvimento",
   },
   {
     slug: "projeto-03",
@@ -51,6 +57,7 @@ export const projects: readonly Project[] = [
     technologies: ["Discovery", "Wireframes", "Testes"],
     cover: { tone: "green", label: "Mockup / Preview" },
     year: 2026,
+    status: "Em desenvolvimento",
   },
   {
     slug: "projeto-04",
@@ -62,15 +69,10 @@ export const projects: readonly Project[] = [
     technologies: ["JavaScript", "Acessibilidade"],
     cover: { tone: "orange", label: "Mockup / Preview" },
     year: 2026,
+    status: "Em desenvolvimento",
   },
 ];
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
-}
-
-export function getNextProject(slug: string) {
-  const currentIndex = projects.findIndex((project) => project.slug === slug);
-  if (currentIndex < 0) return undefined;
-  return projects[(currentIndex + 1) % projects.length];
 }

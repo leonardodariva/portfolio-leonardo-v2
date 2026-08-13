@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowRight, Send } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa6";
 import { SiGithub } from "react-icons/si";
@@ -8,6 +9,7 @@ import ProjectGrid from "./components/ProjectGrid";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import TechnicalSkills from "./components/TechnicalSkills";
+import { T } from "./i18n";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -33,26 +35,23 @@ export default function Home() {
         <div className="hero-layout">
           <div className="hero-copy">
             <div className="eyebrow">
-              <i /> Disponível para oportunidades
+              <i /> <T id="home.available" />
             </div>
             <h1>
-              Design com intenção.
+              <T id="home.hero1" />
               <br />
-              <em>Código com propósito.</em>
+              <em><T id="home.hero2" /></em>
             </h1>
             <div className="hero-bottom">
               <p>
-                Sou Leonardo Dariva,{" "}
-                <strong>UI/UX Designer & Front-end Developer.</strong> Transformo
-                problemas complexos em experiências digitais claras, funcionais e
-                bem construídas.
+                <T id="home.introStart" />{" "}<strong><T id="home.introRole" /></strong>{" "}<T id="home.introEnd" />
               </p>
               <div className="hero-actions">
                 <a className="primary primary-action" href="#projetos">
-                  Ver projetos <ArrowDown aria-hidden="true" size={14} />
+                  <T id="home.viewProjects" /> <ArrowDown aria-hidden="true" size={14} />
                 </a>
                 <a className="secondary-action" href="#contato">
-                  Entrar em contato <Send aria-hidden="true" size={16} />
+                  <T id="home.contact" /> <Send aria-hidden="true" size={16} />
                 </a>
                 {heroSocialLinks.map(({ label, href, Icon }) => (
                   <a
@@ -95,18 +94,20 @@ export default function Home() {
           </div>
         </div>
         <a className="hero-scroll-indicator" href="#sobre">
-          <span>ROLE PARA EXPLORAR</span>
+          <span><T id="home.scroll" /></span>
           <span aria-hidden="true">↓</span>
         </a>
       </section>
 
       <section className="about shell" id="sobre">
-        <div className="about-label">01 / SOBRE</div>
+        <div className="about-label"><T id="home.aboutLabel" /></div>
         <div className="about-content">
           <div className="about-portrait">
-            <img
+            <Image
               src="/about-placeholder.png"
               alt="Composição abstrata temporária"
+              width={800}
+              height={1000}
             />
             <div className="about-tags">
               <span>Figma</span>
@@ -117,24 +118,19 @@ export default function Home() {
           </div>
           <div className="about-main">
             <p className="big-copy">
-              Eu projeto experiências e entendo{" "}
-              <em>como elas ganham vida no código.</em>
+              <T id="home.about1" />{" "}<em><T id="home.about2" /></em>
             </p>
             <div className="about-cols">
               <p>
-                Atuo na interseção entre design e desenvolvimento, combinando
-                pensamento centrado no usuário, clareza visual e conhecimento
-                técnico para criar produtos digitais consistentes. Acredito que
-                boas interfaces vão além da estética: resolvem problemas,
-                reduzem fricção e tornam a tecnologia mais humana.
+                <T id="home.aboutText" />
               </p>
             </div>
             <div className="about-actions">
               <a className="primary primary-action" href="/curriculo">
-                Ver currículo <Arrow />
+                <T id="home.viewResume" /> <Arrow />
               </a>
               <a className="secondary-action" href="#contato">
-                Entrar em contato <Send aria-hidden="true" size={16} />
+                <T id="home.contact" /> <Send aria-hidden="true" size={16} />
               </a>
             </div>
           </div>
@@ -142,9 +138,9 @@ export default function Home() {
       </section>
       <section className="work shell" id="projetos">
         <div className="section-head">
-          <span>02 / PROJETOS</span>
+          <span><T id="home.projectsLabel" /></span>
           <Link className="section-link" href="/projetos">
-            Ver todos os projetos <ArrowRight aria-hidden="true" size={14} />
+            <T id="home.allProjects" /> <ArrowRight aria-hidden="true" size={14} />
           </Link>
         </div>
         <ProjectGrid projects={projects} />
@@ -152,24 +148,22 @@ export default function Home() {
 
       <section className="skills shell" id="skills">
         <div className="section-head">
-          <span>03 / SKILLS</span>
+          <span><T id="home.skillsLabel" /></span>
         </div>
         <TechnicalSkills />
       </section>
       <section className="contact" id="contato">
         <div className="shell">
-          <span className="footer-label">04 / CONTATO</span>
+          <span className="footer-label"><T id="home.contactLabel" /></span>
           <div className="contact-layout">
             <div className="contact-heading">
               <h2>
-                Vamos construir
+                <T id="home.contact1" />
                 <br />
-                algo que <em>faça sentido?</em>
+                <em><T id="home.contact2" /></em>
               </h2>
               <p>
-                Estou aberto a oportunidades, projetos e boas conversas sobre
-                design e tecnologia. Conte um pouco sobre o que você tem em
-                mente.
+                <T id="home.contactText" />
               </p>
             </div>
             <ContactForm />

@@ -2,17 +2,13 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { Send } from "lucide-react";
+import { useLocale } from "../i18n";
 
 type FieldName = "name" | "email" | "message";
 type FieldErrors = Partial<Record<FieldName, string>>;
 
-const errorMessages: Record<FieldName, string> = {
-  name: "Informe seu nome.",
-  email: "Informe um e-mail válido.",
-  message: "Escreva uma mensagem.",
-};
-
 export default function ContactForm() {
+  const { t } = useLocale();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [feedback, setFeedback] = useState("");
   const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -29,7 +25,7 @@ export default function ContactForm() {
 
     (["name", "email", "message"] as FieldName[]).forEach((name) => {
       const field = fields(name) as HTMLInputElement | HTMLTextAreaElement;
-      if (!field.validity.valid) nextErrors[name] = errorMessages[name];
+      if (!field.validity.valid) nextErrors[name] = t(`form.${name}Error`);
     });
 
     return nextErrors;
@@ -43,7 +39,7 @@ export default function ContactForm() {
 
     if (Object.keys(nextErrors).length) return;
 
-    setFeedback("Mensagem pronta para envio. Integração em configuração.");
+    setFeedback(t("form.feedback"));
     if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
     feedbackTimer.current = setTimeout(() => setFeedback(""), 6000);
   }
@@ -72,11 +68,11 @@ export default function ContactForm() {
     <form className="contact-form" onSubmit={submit} noValidate>
       <div className="form-grid">
         <div className="field">
-          <label htmlFor="contact-name">Nome *</label>
+          <label htmlFor="contact-name">{t("form.name")}</label>
           <input
             id="contact-name"
             required
-            placeholder="Como você se chama?"
+            placeholder={t("form.namePlaceholder")}
             {...fieldProps("name")}
           />
           {errors.name && (
@@ -87,21 +83,21 @@ export default function ContactForm() {
         </div>
         <div className="field">
           <label htmlFor="contact-company">
-            Empresa <span>Opcional</span>
+            {t("form.company")}
           </label>
           <input
             id="contact-company"
             name="company"
-            placeholder="Onde você trabalha?"
+            placeholder={t("form.companyPlaceholder")}
           />
         </div>
         <div className="field field-wide">
-          <label htmlFor="contact-email">E-mail *</label>
+          <label htmlFor="contact-email">{t("form.email")}</label>
           <input
             id="contact-email"
             type="email"
             required
-            placeholder="voce@exemplo.com"
+            placeholder={t("form.emailPlaceholder")}
             {...fieldProps("email")}
           />
           {errors.email && (
@@ -111,12 +107,12 @@ export default function ContactForm() {
           )}
         </div>
         <div className="field field-wide">
-          <label htmlFor="contact-message">Mensagem *</label>
+          <label htmlFor="contact-message">{t("form.message")}</label>
           <textarea
             id="contact-message"
             required
             rows={6}
-            placeholder="Fale sobre sua ideia, projeto ou oportunidade."
+            placeholder={t("form.messagePlaceholder")}
             {...fieldProps("message")}
           />
           {errors.message && (
@@ -128,7 +124,7 @@ export default function ContactForm() {
       </div>
       <div className="form-actions">
         <button className="primary-action contact-submit" type="submit">
-          Enviar mensagem <Send aria-hidden="true" size={15} />
+          {t("form.submit")} <Send aria-hidden="true" size={15} />
         </button>
       </div>
       <p className="contact-form-feedback" role="status" aria-live="polite">

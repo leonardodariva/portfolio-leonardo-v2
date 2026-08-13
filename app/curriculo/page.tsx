@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import { T, TranslatedText } from "../i18n";
 
 export const metadata: Metadata = {
   title: "Currículo | Leonardo Dariva",
@@ -98,12 +99,12 @@ export default function Curriculo() {
               className="resume-contact-line"
               aria-label="Informações de contato"
             >
-              <span>Apucarana, Paraná</span>
-              <a>leodarivask@gmail.com</a>
+              <span><T id="resume.location" /></span>
+              <a href="mailto:leodarivask@gmail.com">leodarivask@gmail.com</a>
               {professionalPhone ? (
                 <a href={`tel:${professionalPhone}`}>{professionalPhone}</a>
               ) : (
-                <span>Telefone a adicionar</span>
+                <span><T id="resume.phone" /></span>
               )}
             </div>
             <div
@@ -131,7 +132,7 @@ export default function Curriculo() {
             href="/curriculo-leonardo-dariva.pdf"
             download
           >
-            Baixar currículo <Download aria-hidden="true" size={16} />
+            <T id="resume.download" /> <Download aria-hidden="true" size={16} />
           </a>
         </div>
       </header>
@@ -142,9 +143,9 @@ export default function Curriculo() {
             <span className="resume-section-icon">
               <UserRound aria-hidden="true" size={19} />
             </span>
-            Resumo profissional
+            <T id="resume.summary" />
           </h2>
-          <p className="resume-summary">{professionalSummary}</p>
+          <p className="resume-summary"><TranslatedText>{professionalSummary}</TranslatedText></p>
         </section>
 
         <section className="resume-block">
@@ -152,13 +153,13 @@ export default function Curriculo() {
             <span className="resume-section-icon">
               <MessageSquare aria-hidden="true" size={19} />
             </span>
-            Competências profissionais
+            <T id="resume.professional" />
           </h2>
           <div className="resume-professional-grid">
             {professionalSkills.map((skill) => (
               <article className="resume-professional-item" key={skill.title}>
-                <h3>{skill.title}</h3>
-                <p>{skill.description}</p>
+                <h3><TranslatedText>{skill.title}</TranslatedText></h3>
+                <p><TranslatedText>{skill.description}</TranslatedText></p>
               </article>
             ))}
           </div>
@@ -169,11 +170,11 @@ export default function Curriculo() {
             <span className="resume-section-icon">
               <BriefcaseBusiness aria-hidden="true" size={19} />
             </span>
-            Experiência profissional
+            <T id="resume.experience" />
           </h2>
           <div className="resume-record">
             <p className="resume-status">
-              Experiências profissionais em atualização.
+              <T id="resume.experiencePending" />
             </p>
           </div>
         </section>
@@ -183,11 +184,11 @@ export default function Curriculo() {
             <span className="resume-section-icon">
               <GraduationCap aria-hidden="true" size={20} />
             </span>
-            Formação e estudos
+            <T id="resume.education" />
           </h2>
           <div className="resume-record">
             <p className="resume-status">
-              Informações de formação em atualização.
+              <T id="resume.educationPending" />
             </p>
           </div>
         </section>
@@ -196,14 +197,14 @@ export default function Curriculo() {
             <span className="resume-section-icon">
               <Code2 aria-hidden="true" size={20} />
             </span>
-            Competências técnicas
+            <T id="resume.technical" />
           </h2>
           <div className="resume-technical-grid">
             {resumeSkillGroups.map((group) => (
               <div className="resume-technical-group" key={group.label}>
-                <h3 className="resume-technical-label">{group.label}</h3>
+                <h3 className="resume-technical-label"><TranslatedText>{group.label}</TranslatedText></h3>
                 <ul className="resume-technical-list">
-                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                  {group.items.map((item) => <li key={item}><TranslatedText>{item}</TranslatedText></li>)}
                 </ul>
               </div>
             ))}

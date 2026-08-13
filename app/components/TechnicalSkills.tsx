@@ -1,4 +1,5 @@
 import { Code2, PenTool, Wrench } from "lucide-react";
+import { TranslatedText } from "../i18n";
 
 const technicalSkillGroups = [
   {
@@ -56,11 +57,11 @@ export default function TechnicalSkills() {
               </span>
               <span>{label}</span>
             </div>
-            <h3>{title}</h3>
-            <p>{description}</p>
+            <h3><TranslatedText>{title}</TranslatedText></h3>
+            <p><TranslatedText>{description}</TranslatedText></p>
           </header>
           <ul className="skill-list">
-            {items.map((item) => <li key={item}>{item}</li>)}
+            {items.map((item) => <li key={item}><TranslatedText>{item}</TranslatedText></li>)}
           </ul>
         </article>
       ))}

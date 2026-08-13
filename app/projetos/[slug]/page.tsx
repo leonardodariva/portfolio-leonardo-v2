@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
-import {
-  getNextProject,
-  getProjectBySlug,
-  projects,
-} from "../../../data/projects";
-import InternalFooter from "../../components/InternalFooter";
+import { getProjectBySlug, projects } from "../../../data/projects";
+import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/SiteHeader";
+import CaseGallery from "./CaseGallery";
+import { T, TranslatedText } from "../../i18n";
 
 type CasePageProps = {
   params: Promise<{ slug: string }>;
@@ -27,7 +26,7 @@ export async function generateMetadata({
 
   return {
     title: `${project.title} — Leonardo Dariva`,
-    description: project.description,
+    description: project.summary ?? project.description,
   };
 }
 
@@ -37,104 +36,83 @@ export default async function CasePage({ params }: CasePageProps) {
 
   if (!project) notFound();
 
-  const total = String(projects.length).padStart(2, "0");
-  const nextProject = getNextProject(project.slug);
   const optionalSections = [
-    { label: "DESAFIO", title: "O desafio.", content: project.challenge },
-    { label: "PROCESSO", title: "O processo.", content: project.process },
-    { label: "SOLUÇÃO", title: "A solução.", content: project.solution },
-    { label: "RESULTADO", title: "O resultado.", content: project.result },
+    { title: "projects.context", content: project.context },
+    { title: "projects.role", content: project.role },
+    { title: "projects.process", content: project.process },
+    { title: "projects.solution", content: project.solution },
+    { title: "projects.learnings", content: project.learnings },
   ].filter(({ content }) => Boolean(content));
 
   return (
     <main>
       <SiteHeader currentPage="projects" />
-      <section className="case-hero shell">
-        <Link href="/projetos">← Todos os projetos</Link>
-        <div className="case-meta">
-          <span>{project.number} / {total}</span>
-          <span>{project.category}</span>
-          <span>{project.year}</span>
-        </div>
-        <h1>{project.title}</h1>
-        <p>{project.description}</p>
-      </section>
+      <div className="project-navigation shell">
+        <nav className="project-breadcrumb" aria-label="Breadcrumb">
+          <ol>
+            <li>
+              <Link href="/"><T id="navigation.home" /></Link>
+            </li>
+            <li>
+              <Link href="/projetos"><T id="navigation.projects" /></Link>
+            </li>
+            <li aria-current="page"><TranslatedText>{project.title}</TranslatedText></li>
+          </ol>
+        </nav>
+        <Link className="case-back-link" href="/projetos">
+          <ArrowLeft size={17} strokeWidth={1.8} aria-hidden="true" />
+          <span><T id="projects.all" /></span>
+        </Link>
+      </div>
 
-      <section
-        className={`case-cover shell case-cover-${project.cover.tone}`}
-        aria-label={`Capa de ${project.title}`}
-      >
-        <div className="browser" aria-hidden="true">
-          <div className="browser-top">
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="skeleton">
-            <span />
-            <b />
-            <b />
-            <div />
-            <div />
-          </div>
-        </div>
-        <small>{project.cover.label}</small>
-      </section>
-
-      <section className="case-summary shell">
-        <div>
-          <span>VISÃO GERAL</span>
-          <h2>
-            O projeto em
-            <br />
-            poucas palavras.
-          </h2>
-        </div>
-        <div className="summary-text">
-          <p>{project.description}</p>
-          <dl>
+      <section className="project-overview shell" aria-labelledby="project-title">
+        <header className="project-overview-heading">
+          <h1 id="project-title"><TranslatedText>{project.title}</TranslatedText></h1>
+        </header>
+        <div className="project-overview-content">
+          <p><TranslatedText>{project.summary ?? project.description}</TranslatedText></p>
+          <dl className="project-meta-grid">
             <div>
-              <dt>CATEGORIA</dt>
+              <dt><T id="projects.category" /></dt>
               <dd>{project.category}</dd>
             </div>
             <div>
-              <dt>TECNOLOGIAS</dt>
+              <dt><T id="projects.technologies" /></dt>
               <dd>{project.technologies.join(" · ")}</dd>
             </div>
             <div>
-              <dt>ANO</dt>
+              <dt><T id="projects.year" /></dt>
               <dd>{project.year}</dd>
             </div>
-            <div>
-              <dt>STATUS</dt>
-              <dd>Conteúdo em construção</dd>
-            </div>
+            {project.status && (
+              <div>
+                <dt><T id="projects.status" /></dt>
+                <dd><TranslatedText>{project.status}</TranslatedText></dd>
+              </div>
+            )}
           </dl>
         </div>
       </section>
 
+      <CaseGallery
+        images={project.gallery}
+        label={project.cover.label}
+        title={project.title}
+        tone={project.cover.tone}
+      />
+
       {optionalSections.length > 0 && (
-        <section className="case-details shell">
+        <div className="project-case-sections shell">
           {optionalSections.map((section) => (
-            <article key={section.label}>
-              <span>{section.label}</span>
-              <h2>{section.title}</h2>
-              <p>{section.content}</p>
-            </article>
+            <section className="project-case-section" key={section.title}>
+              <h2><T id={section.title} /></h2>
+              <p><TranslatedText>{section.content ?? ""}</TranslatedText></p>
+            </section>
           ))}
-        </section>
+        </div>
       )}
 
-      {nextProject && (
-        <section className="case-next shell">
-          <span>PRÓXIMO PROJETO</span>
-          <Link href={`/projetos/${nextProject.slug}`}>
-            <span>{nextProject.title}</span>
-            <b>{nextProject.number}</b>
-          </Link>
-        </section>
-      )}
-      <InternalFooter />
+      <SiteFooter />
     </main>
   );
 }
