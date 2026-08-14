@@ -81,8 +81,8 @@ export default async function CasePage({ params }: CasePageProps) {
               <dd>{project.technologies.join(" · ")}</dd>
             </div>
             <div>
-              <dt><T id="projects.year" /></dt>
-              <dd>{project.year}</dd>
+              <dt><T id="projects.period" /></dt>
+              <dd>{project.period}</dd>
             </div>
             {project.status && (
               <div>

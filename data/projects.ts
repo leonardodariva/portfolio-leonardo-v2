@@ -13,7 +13,7 @@ export type Project = {
     label: string;
   };
   gallery?: string[];
-  year: number;
+  period: string;
   context?: string;
   role?: string;
   process?: string;
@@ -24,16 +24,16 @@ export type Project = {
 
 export const projects: readonly Project[] = [
   {
-    slug: "projeto-01",
+    slug: "Sistema Oráculo - Futuro Corp",
     number: "01",
-    category: "UI/UX · Product Design",
-    title: "Nome do projeto",
+    category: "Produto digital · UI/UX Design",
+    title: "Oráculo · Futuro Corp",
     description:
-      "Breve descrição do projeto, seu objetivo e o principal desafio trabalhado.",
+      "Atuação em UI/UX Design na evolução do Oráculo, uma plataforma de planejamento financeiro criada para organizar informações, apoiar planejadores e tornar jornadas complexas mais claras para seus usuários.",
     technologies: ["Figma", "Pesquisa", "Prototipação"],
     cover: { tone: "violet", label: "Mockup / Preview" },
-    year: 2026,
-    status: "Em desenvolvimento",
+    period: "2024–2025",
+    status: "Projeto profissional · Em desenvolvimento",
   },
   {
     slug: "projeto-02",
@@ -44,7 +44,7 @@ export const projects: readonly Project[] = [
       "Breve descrição do projeto, seu objetivo e o principal desafio trabalhado.",
     technologies: ["React", "TypeScript", "CSS"],
     cover: { tone: "blue", label: "Mockup / Preview" },
-    year: 2026,
+    period: "2026",
     status: "Em desenvolvimento",
   },
   {
@@ -56,7 +56,7 @@ export const projects: readonly Project[] = [
       "Breve descrição do projeto, seu objetivo e o principal desafio trabalhado.",
     technologies: ["Discovery", "Wireframes", "Testes"],
     cover: { tone: "green", label: "Mockup / Preview" },
-    year: 2026,
+    period: "2026",
     status: "Em desenvolvimento",
   },
   {
@@ -68,7 +68,7 @@ export const projects: readonly Project[] = [
       "Breve descrição do projeto, seu objetivo e o principal desafio trabalhado.",
     technologies: ["JavaScript", "Acessibilidade"],
     cover: { tone: "orange", label: "Mockup / Preview" },
-    year: 2026,
+    period: "2026",
     status: "Em desenvolvimento",
   },
 ];
