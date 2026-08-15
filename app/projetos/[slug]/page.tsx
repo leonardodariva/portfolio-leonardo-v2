@@ -74,15 +74,15 @@ export default async function CasePage({ params }: CasePageProps) {
           <dl className="project-meta-grid">
             <div>
               <dt><T id="projects.category" /></dt>
-              <dd>{project.category}</dd>
+              <dd><TranslatedText>{project.category}</TranslatedText></dd>
             </div>
             <div>
               <dt><T id="projects.technologies" /></dt>
-              <dd>{project.technologies.join(" · ")}</dd>
+              <dd><TranslatedText>{project.technologies.join(" · ")}</TranslatedText></dd>
             </div>
             <div>
               <dt><T id="projects.period" /></dt>
-              <dd>{project.period}</dd>
+              <dd><TranslatedText>{project.period}</TranslatedText></dd>
             </div>
             {project.status && (
               <div>
@@ -99,6 +99,7 @@ export default async function CasePage({ params }: CasePageProps) {
         label={project.cover.label}
         title={project.title}
         tone={project.cover.tone}
+        hasFollowingSections={optionalSections.length > 0}
       />
 
       {optionalSections.length > 0 && (

@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { ProjectTone } from "../../../data/projects";
 import { useLocale } from "../../i18n";
 
@@ -11,6 +12,7 @@ type CaseGalleryProps = {
   label: string;
   title: string;
   tone: ProjectTone;
+  hasFollowingSections?: boolean;
 };
 
 export default function CaseGallery({
@@ -18,97 +20,97 @@ export default function CaseGallery({
   label,
   title,
   tone,
+  hasFollowingSections = false,
 }: CaseGalleryProps) {
   const { t } = useLocale();
-  const visibleImages = images.slice(0, 5);
+  const galleryItems: (string | undefined)[] = images.length > 0 ? images : [undefined];
   const [activeImage, setActiveImage] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const lastTrigger = useRef<HTMLButtonElement | null>(null);
+  const isOpen = activeImage !== null;
+  const activeSource = activeImage === null ? undefined : galleryItems[activeImage];
 
   useEffect(() => {
-    if (activeImage === null) return;
+    if (!isOpen) return;
 
+    const page = document.querySelector("main");
+    const pageWasInert = page?.hasAttribute("inert") ?? false;
     const previousOverflow = document.body.style.overflow;
-    const closeOnEscape = (event: KeyboardEvent) => {
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    page?.setAttribute("inert", "");
+    document.body.style.overflow = "hidden";
+
+    const handleKeyboard = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActiveImage(null);
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        setActiveImage((current) =>
+          current === null ? current : Math.max(0, current - 1),
+        );
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        setActiveImage((current) =>
+          current === null
+            ? current
+            : Math.min(galleryItems.length - 1, current + 1),
+        );
+      }
     };
 
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("keydown", handleKeyboard);
 
     return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyboard);
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
+      if (!pageWasInert) page?.removeAttribute("inert");
       lastTrigger.current?.focus();
     };
-  }, [activeImage]);
+  }, [isOpen, galleryItems.length]);
 
   const openImage = (index: number, trigger: HTMLButtonElement) => {
     lastTrigger.current = trigger;
     setActiveImage(index);
   };
 
-  const renderPreview = (image: string | undefined, index: number) =>
-    image ? (
-      <Image
-        src={image}
-        alt={`${title} — mockup ${index + 1}`}
-        fill
-        sizes={index === 0 ? "(max-width: 800px) 100vw, 75vw" : "25vw"}
-      />
-    ) : (
-      <div className={`case-cover-fallback case-cover-${tone}`} aria-hidden="true">
-        <div className="browser">
-          <div className="browser-top">
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="skeleton">
-            <span />
-            <b />
-            <b />
-            <div />
-            <div />
-          </div>
-        </div>
-        <small>{label}</small>
-      </div>
+  const showPreviousImage = () => {
+    setActiveImage((current) =>
+      current === null ? current : Math.max(0, current - 1),
     );
+  };
 
-  const galleryItems = visibleImages.length > 0 ? visibleImages : [undefined];
+  const showNextImage = () => {
+    setActiveImage((current) =>
+      current === null
+        ? current
+        : Math.min(galleryItems.length - 1, current + 1),
+    );
+  };
 
-  return (
-    <>
-      <section
-        className={`case-gallery shell ${galleryItems.length === 1 ? "case-gallery-single" : ""}`}
-        aria-label={`${t("projects.gallery")} ${title}`}
-      >
-        <button
-          className="case-gallery-main"
-          type="button"
-          onClick={(event) => openImage(0, event.currentTarget)}
-          aria-label={`${t("projects.enlargeMain")} ${title}`}
-        >
-          {renderPreview(galleryItems[0], 0)}
-        </button>
+  const renderFallback = () => (
+    <div className={`case-cover-fallback case-cover-${tone}`} aria-hidden="true">
+      <div className="browser">
+        <div className="browser-top">
+          <i />
+          <i />
+          <i />
+        </div>
+        <div className="skeleton">
+          <span />
+          <b />
+          <b />
+          <div />
+          <div />
+        </div>
+      </div>
+      <small>{label}</small>
+    </div>
+  );
 
-        {galleryItems.length > 1 && (
-          <div className="case-gallery-thumbnails">
-            {galleryItems.slice(1).map((image, index) => (
-              <button
-                key={`${image}-${index}`}
-                type="button"
-                onClick={(event) => openImage(index + 1, event.currentTarget)}
-                aria-label={`${t("projects.enlarge")} ${index + 2} ${title}`}
-              >
-                {renderPreview(image, index + 1)}
-              </button>
-            ))}
-          </div>
-        )}
-      </section>
-
-      {activeImage !== null && (
+  const lightbox = activeImage !== null
+    ? createPortal(
         <div
           className="case-lightbox"
           role="dialog"
@@ -118,26 +120,106 @@ export default function CaseGallery({
             if (event.target === event.currentTarget) setActiveImage(null);
           }}
           onKeyDown={(event) => {
-            if (event.key === "Tab") {
+            if (event.key !== "Tab") return;
+            const controls = Array.from(
+              event.currentTarget.querySelectorAll<HTMLButtonElement>("button:not(:disabled)"),
+            );
+            const firstControl = controls[0];
+            const lastControl = controls.at(-1);
+
+            if (event.shiftKey && document.activeElement === firstControl) {
               event.preventDefault();
-              event.currentTarget.querySelector<HTMLButtonElement>("button")?.focus();
+              lastControl?.focus();
+            } else if (!event.shiftKey && document.activeElement === lastControl) {
+              event.preventDefault();
+              firstControl?.focus();
             }
           }}
         >
           <button
             className="case-lightbox-close"
             type="button"
+            ref={closeButtonRef}
             onClick={() => setActiveImage(null)}
-            aria-label={t("projects.close")}
-            autoFocus
+            aria-label={t("projects.closeGallery")}
           >
             <X aria-hidden="true" />
           </button>
+
+          <button
+            className="case-lightbox-navigation case-lightbox-previous"
+            type="button"
+            onClick={showPreviousImage}
+            aria-label={t("projects.previousImage")}
+            disabled={activeImage === 0}
+          >
+            <ChevronLeft aria-hidden="true" />
+          </button>
+
           <div className="case-lightbox-content">
-            {renderPreview(galleryItems[activeImage], activeImage)}
+            {activeSource ? (
+              <Image
+                key={`${activeImage}-${activeSource}`}
+                src={activeSource}
+                alt={`${title} — mockup ${activeImage + 1}`}
+                fill
+                sizes="95vw"
+                unoptimized
+              />
+            ) : (
+              renderFallback()
+            )}
           </div>
-        </div>
-      )}
+
+          <button
+            className="case-lightbox-navigation case-lightbox-next"
+            type="button"
+            onClick={showNextImage}
+            aria-label={t("projects.nextImage")}
+            disabled={activeImage === galleryItems.length - 1}
+          >
+            <ChevronRight aria-hidden="true" />
+          </button>
+
+          <span className="case-lightbox-counter" aria-live="polite">
+            {activeImage + 1} / {galleryItems.length}
+          </span>
+        </div>,
+        document.body,
+      )
+    : null;
+
+  return (
+    <>
+      <section
+        className={`case-gallery shell${hasFollowingSections ? "" : " case-gallery-end"}`}
+        aria-label={`${t("projects.gallery")} ${title}`}
+      >
+        {galleryItems.map((image, index) => (
+          <button
+            className={`case-gallery-item${image ? "" : " case-gallery-fallback-item"}`}
+            type="button"
+            key={`${image ?? "fallback"}-${index}`}
+            onClick={(event) => openImage(index, event.currentTarget)}
+            aria-label={`${t("projects.enlargeImage")} ${index + 1} — ${title}`}
+          >
+            {image ? (
+              <Image
+                className="case-gallery-image"
+                src={image}
+                alt={`${title} — mockup ${index + 1}`}
+                width={0}
+                height={0}
+                sizes="(max-width: 1360px) 100vw, 1280px"
+                unoptimized
+              />
+            ) : (
+              renderFallback()
+            )}
+          </button>
+        ))}
+      </section>
+      {lightbox}
     </>
   );
 }
