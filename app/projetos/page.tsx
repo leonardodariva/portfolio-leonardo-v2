@@ -20,6 +20,9 @@ export default function Projetos() {
       </section>
       <section className="projects-page-list shell" aria-label="Todos os projetos">
         <ProjectGrid projects={projects} />
+        <p className="projects-page-note">
+          <T id="projects.additionalNote" />
+        </p>
       </section>
       <SiteFooter />
     </main>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
@@ -73,7 +74,14 @@ export default function SiteHeader({ currentPage = "home" }: SiteHeaderProps) {
     <header className="header">
       <div className="header-inner shell">
         <Link className="brand" href={isHome ? "#inicio" : "/#inicio"} aria-label="Início">
-          <span>LD</span>
+          <Image
+            className="brand-avatar"
+            src="/images/about-leonardo.jpg"
+            alt=""
+            width={32}
+            height={32}
+            aria-hidden="true"
+          />
           <strong>
             Leonardo Dariva<small>UI/UX Designer &amp; Front-end Developer</small>
           </strong>

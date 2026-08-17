@@ -104,26 +104,26 @@ export default function Home() {
         <div className="about-content">
           <div className="about-portrait">
             <Image
-              src="/about-placeholder.png"
-              alt="Composição abstrata temporária"
-              width={800}
-              height={1000}
+              src="/images/about-leonardo.jpg"
+              alt="Leonardo Dariva trabalhando com uma câmera"
+              width={724}
+              height={1086}
             />
-            <div className="about-tags">
-              <span>Figma</span>
-              <span>UI/UX</span>
-              <span>Front-end</span>
-              <span>VS Code</span>
-            </div>
           </div>
           <div className="about-main">
             <p className="big-copy">
-              <T id="home.about1" />{" "}<em><T id="home.about2" /></em>
+              <T id="home.about1" />{" "}<em><T id="home.about2" /></em><T id="home.about3" />
             </p>
             <div className="about-cols">
               <p>
                 <T id="home.aboutText" />
               </p>
+            </div>
+            <div className="about-tags">
+              <span>UI/UX Design</span>
+              <span>Figma</span>
+              <span>HTML &amp; CSS</span>
+              <span>JavaScript</span>
             </div>
             <div className="about-actions">
               <a className="primary primary-action" href="/curriculo">

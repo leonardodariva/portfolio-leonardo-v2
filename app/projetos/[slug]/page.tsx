@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getProjectBySlug, projects } from "../../../data/projects";
 import SiteFooter from "../../components/SiteFooter";
@@ -42,6 +42,7 @@ export default async function CasePage({ params }: CasePageProps) {
     { title: "projects.process", content: project.process },
     { title: "projects.solution", content: project.solution },
     { title: "projects.learnings", content: project.learnings },
+    { title: "projects.note", content: project.note },
   ].filter(({ content }) => Boolean(content));
 
   return (
@@ -70,16 +71,35 @@ export default async function CasePage({ params }: CasePageProps) {
           <h1 id="project-title"><TranslatedText>{project.title}</TranslatedText></h1>
         </header>
         <div className="project-overview-content">
-          <p><TranslatedText>{project.summary ?? project.description}</TranslatedText></p>
+          <div className="project-overview-summary">
+            <p><TranslatedText>{project.summary ?? project.description}</TranslatedText></p>
+            {project.externalUrl && (
+              <a
+                className="project-external-link"
+                href={project.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.externalLinkLabel ? (
+                  <TranslatedText>{project.externalLinkLabel}</TranslatedText>
+                ) : (
+                  <T id="projects.visitWebsite" />
+                )}
+                <ExternalLink size={15} aria-hidden="true" />
+              </a>
+            )}
+          </div>
           <dl className="project-meta-grid">
             <div>
               <dt><T id="projects.category" /></dt>
               <dd><TranslatedText>{project.category}</TranslatedText></dd>
             </div>
-            <div>
-              <dt><T id="projects.technologies" /></dt>
-              <dd><TranslatedText>{project.technologies.join(" · ")}</TranslatedText></dd>
-            </div>
+            {project.technologies.length > 0 && (
+              <div>
+                <dt><T id="projects.technologies" /></dt>
+                <dd><TranslatedText>{project.technologies.join(" · ")}</TranslatedText></dd>
+              </div>
+            )}
             <div>
               <dt><T id="projects.period" /></dt>
               <dd><TranslatedText>{project.period}</TranslatedText></dd>
@@ -99,6 +119,7 @@ export default async function CasePage({ params }: CasePageProps) {
         label={project.cover.label}
         title={project.title}
         tone={project.cover.tone}
+        layout={project.galleryLayout}
         hasFollowingSections={optionalSections.length > 0}
       />
 
