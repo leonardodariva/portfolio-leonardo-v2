@@ -27,7 +27,6 @@ const technicalSkillGroups = [
       "CSS",
       "JavaScript",
       "Design Responsivo",
-      "Componentização",
       "React — em aprendizado",
       "TypeScript — em aprendizado",
     ],

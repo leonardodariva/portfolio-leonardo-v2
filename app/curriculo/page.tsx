@@ -39,19 +39,20 @@ type EducationEntry = {
 
 const professionalExperiences: readonly ResumeExperience[] = [
   {
-    title: "Designer de Interface do Usuário",
+    title: "UI/UX Designer",
     organization: "Futuro Corp · Freelance",
     period: "2024 – jul. 2025",
     descriptions: [
-      "Atuação em UI/UX Design na evolução de interfaces e experiências digitais do produto Oráculo, uma plataforma voltada ao planejamento financeiro. Contribuí para tornar informações e jornadas complexas mais claras, organizadas e intuitivas.",
+      "Atuação freelance no desenho e evolução dos produtos do Oráculo, sistemas voltados a planejadores financeiros. Participei de etapas de entendimento, pesquisa, definição de interfaces, validação e refinamento das soluções.",
     ],
     contributions: [
-      "Evolução de interfaces para uma plataforma de planejamento financeiro.",
-      "Organização de informações e jornadas para tornar a experiência mais clara e intuitiva.",
-      "Colaboração na consistência visual e na qualidade das interfaces do produto.",
+      "Pesquisa e conversas com usuários e stakeholders para compreender necessidades do produto.",
+      "Participação em reuniões de alinhamento, apresentação de soluções e coleta de feedback.",
+      "Criação de arquiteturas de informação, wireframes, protótipos e interfaces.",
+      "Testes e refinamento contínuo das soluções para melhorar clareza e usabilidade.",
     ],
     projects: [
-      { label: "Oráculo · Futuro Corp", href: "/projetos/Sistema Oráculo - Futuro Corp" },
+      { label: "Ver case do Oráculo", href: "/projetos/Sistema Oráculo - Futuro Corp" },
     ],
   },
   {
@@ -59,23 +60,15 @@ const professionalExperiences: readonly ResumeExperience[] = [
     organization: "Glass Aplicativos e Softwares · Tempo integral · Apucarana, PR",
     period: "nov. 2020 – fev. 2024",
     descriptions: [
-      "Atuei em UI/UX Design e desenvolvimento web para diferentes produtos digitais. Participei desde o entendimento das necessidades com clientes até a organização, prototipação, validação e implementação de interfaces, fluxos e páginas web.",
+      "Atuei em UI/UX Design e desenvolvimento web para diferentes produtos digitais. Participei do processo de produto desde a pesquisa e entendimento das necessidades até o desenho, validação e implementação de interfaces e páginas web.",
     ],
     contributions: [
-      "Condução de briefings, reuniões de alinhamento e levantamento de necessidades com clientes.",
-      "Pesquisa UX, análise de referências e organização de requisitos para orientar decisões de produto.",
-      "Criação de arquiteturas de informação, wireframes e protótipos para estruturar interfaces e experiências digitais.",
-      "Desenvolvimento de interfaces e padrões de interação para aplicativos, dashboards e páginas web.",
-      "Apresentação de soluções, coleta de feedback, testes de usabilidade e refinamento contínuo das interfaces.",
-      "Participação em testes A/B e validações para comparar alternativas de interface e apoiar decisões de produto.",
-      "Colaboração entre clientes, design e desenvolvimento em produtos dos segmentos de seguros, fidelidade, gestão comercial e agronegócio.",
-      "Aprendizado contínuo em design e desenvolvimento por meio da prática profissional e de cursos na Udemy disponibilizados pela empresa.",
-    ],
-    projects: [
-      { label: "Cresol Seguros", href: "/projetos/cresol-seguros" },
-      { label: "Cresol Fidelidade", href: "/projetos/cresol-fidelidade" },
-      { label: "PowerGO", href: "/projetos/powergo" },
-      { label: "BRX Agro", href: "/projetos/brx-agro" },
+      "Pesquisa com usuários, briefings e reuniões de alinhamento para compreender necessidades e requisitos.",
+      "Criação de arquiteturas de informação, wireframes, protótipos e interfaces para aplicativos, dashboards e páginas web.",
+      "Apresentação de soluções, coleta de feedback e testes de usabilidade para orientar refinamentos.",
+      "Participação em testes A/B e validações de alternativas de interface.",
+      "Desenvolvimento e implementação de páginas e interfaces web em colaboração com design e tecnologia.",
+      "Atuação em produtos dos segmentos de seguros, fidelidade, gestão comercial e agronegócio.",
     ],
     additionalNote: {
       title: "Outros projetos e entregas",
@@ -106,7 +99,8 @@ const resumeSkillGroups = [
       "CSS",
       "JavaScript",
       "Design Responsivo",
-      "Componentização",
+      "React — em aprendizado",
+      "TypeScript — em aprendizado",
     ],
   },
   {
@@ -266,7 +260,7 @@ export default function Curriculo() {
                   {experience.projects && (
                     <div className="resume-project-links">
                       {experience.projects.map((project) => (
-                        <Link href={project.href} key={project.href}>{project.label}</Link>
+                        <Link href={project.href} key={project.href}><TranslatedText>{project.label}</TranslatedText></Link>
                       ))}
                     </div>
                   )}
@@ -313,7 +307,17 @@ export default function Curriculo() {
               <div className="resume-technical-group" key={group.label}>
                 <h3 className="resume-technical-label"><TranslatedText>{group.label}</TranslatedText></h3>
                 <ul className="resume-technical-list">
-                  {group.items.map((item) => <li key={item}><TranslatedText>{item}</TranslatedText></li>)}
+                  {group.items.map((item) => {
+                    const [skill, learningStatus] = item.split(" — ");
+                    return (
+                      <li key={item}>
+                        <TranslatedText>{skill}</TranslatedText>
+                        {learningStatus ? (
+                          <span className="skill-learning-status"> — <TranslatedText>{learningStatus}</TranslatedText></span>
+                        ) : null}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}

@@ -58,6 +58,19 @@ export function T({ id }: { id: TranslationPath }) {
 }
 
 const englishContent: Record<string, string> = {
+  "Atuação freelance no desenho e evolução dos produtos do Oráculo, sistemas voltados a planejadores financeiros. Participei de etapas de entendimento, pesquisa, definição de interfaces, validação e refinamento das soluções.": "Worked freelance on designing and evolving Oráculo’s products, systems built for financial planners. Participated in understanding, research, interface definition, validation, and solution refinement.",
+  "Pesquisa e conversas com usuários e stakeholders para compreender necessidades do produto.": "Conducted research and conversations with users and stakeholders to understand product needs.",
+  "Participação em reuniões de alinhamento, apresentação de soluções e coleta de feedback.": "Participated in alignment meetings, solution presentations, and feedback collection.",
+  "Criação de arquiteturas de informação, wireframes, protótipos e interfaces.": "Created information architectures, wireframes, prototypes, and interfaces.",
+  "Testes e refinamento contínuo das soluções para melhorar clareza e usabilidade.": "Tested and continuously refined solutions to improve clarity and usability.",
+  "Ver case do Oráculo": "View Oráculo case",
+  "Atuei em UI/UX Design e desenvolvimento web para diferentes produtos digitais. Participei do processo de produto desde a pesquisa e entendimento das necessidades até o desenho, validação e implementação de interfaces e páginas web.": "Worked in UI/UX Design and web development for different digital products. Participated in the product process from research and understanding needs to designing, validating, and implementing interfaces and web pages.",
+  "Pesquisa com usuários, briefings e reuniões de alinhamento para compreender necessidades e requisitos.": "Conducted user research, briefings, and alignment meetings to understand needs and requirements.",
+  "Criação de arquiteturas de informação, wireframes, protótipos e interfaces para aplicativos, dashboards e páginas web.": "Created information architectures, wireframes, prototypes, and interfaces for applications, dashboards, and web pages.",
+  "Apresentação de soluções, coleta de feedback e testes de usabilidade para orientar refinamentos.": "Presented solutions, gathered feedback, and conducted usability testing to guide refinements.",
+  "Participação em testes A/B e validações de alternativas de interface.": "Participated in A/B testing and validation of interface alternatives.",
+  "Desenvolvimento e implementação de páginas e interfaces web em colaboração com design e tecnologia.": "Developed and implemented web pages and interfaces in collaboration with design and technology.",
+  "Atuação em produtos dos segmentos de seguros, fidelidade, gestão comercial e agronegócio.": "Worked on products in insurance, loyalty, sales management, and agribusiness.",
   "Conduzo briefings, alinhamentos e apresentações para transformar necessidades e feedbacks em decisões de interface mais claras.": "I conduct briefings, alignment sessions, and presentations to turn needs and feedback into clearer interface decisions.",
   "Atuo em parceria com clientes, design e desenvolvimento, conectando objetivos de negócio, experiência e viabilidade técnica.": "I work alongside clients, design, and development, connecting business goals, user experience, and technical feasibility.",
   "Validação e refinamento": "Validation and refinement",
