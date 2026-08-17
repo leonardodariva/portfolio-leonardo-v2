@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import {
   BriefcaseBusiness,
   Code2,
@@ -18,21 +19,84 @@ export const metadata: Metadata = {
 };
 
 const professionalSummary =
-  "UI/UX Designer & Front-end Developer com foco em transformar problemas complexos em experiências digitais claras, funcionais e centradas nas pessoas. Combino pensamento de produto, design de interfaces e desenvolvimento front-end para criar soluções consistentes, acessíveis e bem estruturadas.";
+  "UI/UX Designer & Front-end Developer com experiência na criação de interfaces e experiências digitais para diferentes contextos de negócio. Combino organização visual, pensamento centrado no usuário e conhecimentos de HTML, CSS e JavaScript para contribuir com soluções claras, consistentes e bem estruturadas.";
 
-const professionalPhone: string | null = null;
+type ResumeExperience = {
+  title: string;
+  organization: string;
+  period: string;
+  descriptions: readonly string[];
+  contributions: readonly string[];
+  projects?: readonly { label: string; href: string }[];
+  additionalNote?: { title: string; description: string };
+};
+
+type EducationEntry = {
+  title: string;
+  institution: string;
+  period?: string;
+};
+
+const professionalExperiences: readonly ResumeExperience[] = [
+  {
+    title: "Designer de Interface do Usuário",
+    organization: "Futuro Corp · Freelance",
+    period: "2024 – jul. 2025",
+    descriptions: [
+      "Atuação em UI/UX Design na evolução de interfaces e experiências digitais do produto Oráculo, uma plataforma voltada ao planejamento financeiro. Contribuí para tornar informações e jornadas complexas mais claras, organizadas e intuitivas.",
+    ],
+    contributions: [
+      "Evolução de interfaces para uma plataforma de planejamento financeiro.",
+      "Organização de informações e jornadas para tornar a experiência mais clara e intuitiva.",
+      "Colaboração na consistência visual e na qualidade das interfaces do produto.",
+    ],
+    projects: [
+      { label: "Oráculo · Futuro Corp", href: "/projetos/Sistema Oráculo - Futuro Corp" },
+    ],
+  },
+  {
+    title: "UI/UX Designer & Desenvolvedor Web",
+    organization: "Glass Aplicativos e Softwares · Tempo integral · Apucarana, PR",
+    period: "nov. 2020 – fev. 2024",
+    descriptions: [
+      "Atuei em UI/UX Design e desenvolvimento web para diferentes produtos digitais. Participei desde o entendimento das necessidades com clientes até a organização, prototipação, validação e implementação de interfaces, fluxos e páginas web.",
+    ],
+    contributions: [
+      "Condução de briefings, reuniões de alinhamento e levantamento de necessidades com clientes.",
+      "Pesquisa UX, análise de referências e organização de requisitos para orientar decisões de produto.",
+      "Criação de arquiteturas de informação, wireframes e protótipos para estruturar interfaces e experiências digitais.",
+      "Desenvolvimento de interfaces e padrões de interação para aplicativos, dashboards e páginas web.",
+      "Apresentação de soluções, coleta de feedback, testes de usabilidade e refinamento contínuo das interfaces.",
+      "Participação em testes A/B e validações para comparar alternativas de interface e apoiar decisões de produto.",
+      "Colaboração entre clientes, design e desenvolvimento em produtos dos segmentos de seguros, fidelidade, gestão comercial e agronegócio.",
+      "Aprendizado contínuo em design e desenvolvimento por meio da prática profissional e de cursos na Udemy disponibilizados pela empresa.",
+    ],
+    projects: [
+      { label: "Cresol Seguros", href: "/projetos/cresol-seguros" },
+      { label: "Cresol Fidelidade", href: "/projetos/cresol-fidelidade" },
+      { label: "PowerGO", href: "/projetos/powergo" },
+      { label: "BRX Agro", href: "/projetos/brx-agro" },
+    ],
+    additionalNote: {
+      title: "Outros projetos e entregas",
+      description: "Outras experiências profissionais podem ser apresentadas em conversa.",
+    },
+  },
+];
+
+const educationEntries: readonly EducationEntry[] = [];
 
 const resumeSkillGroups = [
   {
     label: "Design & UI/UX",
     items: [
-      "UI Design",
-      "UX Research",
+      "Design de Interfaces",
       "Arquitetura da Informação",
-      "Wireframing",
+      "Wireframes",
       "Prototipação",
-      "Design Systems",
+      "Design de Interação",
       "Acessibilidade",
+      "Testes de Usabilidade",
     ],
   },
   {
@@ -41,9 +105,7 @@ const resumeSkillGroups = [
       "HTML",
       "CSS",
       "JavaScript",
-      "TypeScript",
-      "React",
-      "Responsive Design",
+      "Design Responsivo",
       "Componentização",
     ],
   },
@@ -51,35 +113,45 @@ const resumeSkillGroups = [
     label: "Ferramentas",
     items: [
       "Figma",
-      "VS Code",
       "Adobe XD",
-      "GitHub",
-      "Adobe Creative Suite",
-      "DevTools",
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "VS Code",
+      "IA aplicada ao processo",
     ],
   },
 ];
 
 const professionalSkills = [
   {
-    title: "Comunicação clara",
+    title: "Pensamento de produto",
     description:
-      "Capacidade de traduzir necessidades, ideias e decisões de produto em soluções compreensíveis.",
+      "Considero objetivos de negócio, necessidades dos usuários, pesquisas, feedbacks e viabilidade da interface para apoiar decisões mais consistentes.",
   },
   {
-    title: "Pensamento centrado no usuário",
+    title: "Comunicação e clareza",
     description:
-      "Atenção ao contexto, à usabilidade e à clareza em cada etapa da experiência.",
+      "Conduzo briefings, alinhamentos e apresentações para transformar necessidades e feedbacks em decisões de interface mais claras.",
   },
   {
-    title: "Colaboração",
+    title: "Resolução de problemas",
     description:
-      "Facilidade para trabalhar em conjunto com clientes, times criativos e desenvolvimento.",
+      "Organizo informações, identifico prioridades e transformo desafios em experiências digitais mais claras e funcionais.",
+  },
+  {
+    title: "Colaboração multidisciplinar",
+    description:
+      "Atuo em parceria com clientes, design e desenvolvimento, conectando objetivos de negócio, experiência e viabilidade técnica.",
+  },
+  {
+    title: "Validação e refinamento",
+    description:
+      "Apresento soluções, reúno feedbacks e realizo testes para aprimorar interfaces e apoiar decisões de produto.",
   },
   {
     title: "Aprendizado contínuo",
     description:
-      "Interesse constante em aprimorar repertório de design, tecnologia e produtos digitais.",
+      "Mantenho uma rotina constante de evolução em design, desenvolvimento e produtos digitais, unindo prática profissional e estudo.",
   },
 ];
 
@@ -101,11 +173,6 @@ export default function Curriculo() {
             >
               <span><T id="resume.location" /></span>
               <a href="mailto:leodarivask@gmail.com">leodarivask@gmail.com</a>
-              {professionalPhone ? (
-                <a href={`tel:${professionalPhone}`}>{professionalPhone}</a>
-              ) : (
-                <span><T id="resume.phone" /></span>
-              )}
             </div>
             <div
               className="resume-social-links"
@@ -172,26 +239,68 @@ export default function Curriculo() {
             </span>
             <T id="resume.experience" />
           </h2>
-          <div className="resume-record">
-            <p className="resume-status">
-              <T id="resume.experiencePending" />
-            </p>
+          <div>
+            <div className="resume-experience-list">
+              {professionalExperiences.map((experience) => (
+                <article className="resume-experience-item" key={experience.title}>
+                  <div className="resume-experience-heading">
+                    <div>
+                      <h3><TranslatedText>{experience.title}</TranslatedText></h3>
+                      <p className="resume-experience-organization"><TranslatedText>{experience.organization}</TranslatedText></p>
+                    </div>
+                    <p className="resume-experience-period"><TranslatedText>{experience.period}</TranslatedText></p>
+                  </div>
+                  <div className="resume-experience-copy">
+                    {experience.descriptions.map((description) => (
+                      <p className="resume-experience-description" key={description}><TranslatedText>{description}</TranslatedText></p>
+                    ))}
+                  </div>
+                  <div className="resume-contributions">
+                    <h4><T id="resume.keyContributions" /></h4>
+                    <ul>
+                      {experience.contributions.map((contribution) => (
+                        <li key={contribution}><TranslatedText>{contribution}</TranslatedText></li>
+                      ))}
+                    </ul>
+                  </div>
+                  {experience.projects && (
+                    <div className="resume-project-links">
+                      {experience.projects.map((project) => (
+                        <Link href={project.href} key={project.href}>{project.label}</Link>
+                      ))}
+                    </div>
+                  )}
+                  {experience.additionalNote && (
+                    <aside className="resume-additional-work">
+                      <h4><TranslatedText>{experience.additionalNote.title}</TranslatedText></h4>
+                      <p><TranslatedText>{experience.additionalNote.description}</TranslatedText></p>
+                    </aside>
+                  )}
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section className="resume-block">
-          <h2 className="resume-panel-title">
-            <span className="resume-section-icon">
-              <GraduationCap aria-hidden="true" size={20} />
-            </span>
-            <T id="resume.education" />
-          </h2>
-          <div className="resume-record">
-            <p className="resume-status">
-              <T id="resume.educationPending" />
-            </p>
-          </div>
-        </section>
+        {educationEntries.length > 0 && (
+          <section className="resume-block">
+            <h2 className="resume-panel-title">
+              <span className="resume-section-icon">
+                <GraduationCap aria-hidden="true" size={20} />
+              </span>
+              <T id="resume.education" />
+            </h2>
+            <div className="resume-experience-list">
+              {educationEntries.map((entry) => (
+                <article className="resume-record" key={`${entry.title}-${entry.institution}`}>
+                  <h3>{entry.title}</h3>
+                  <p>{entry.institution}</p>
+                  {entry.period && <p>{entry.period}</p>}
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
         <section className="resume-block">
           <h2 className="resume-panel-title">
             <span className="resume-section-icon">

@@ -8,15 +8,15 @@ const technicalSkillGroups = [
     accent: "purple",
     items: [
       "UI Design",
-      "UX Research",
+      "UX Design",
       "Arquitetura da Informação",
       "Wireframing",
       "Prototipação",
       "Design Systems",
       "Acessibilidade",
     ],
-    title: "Projetar com clareza.",
-    description: "Entender problemas e projetar experiências claras e funcionais.",
+    title: "Projetar experiências com clareza.",
+    description: "Organizar interfaces e fluxos digitais com foco em clareza, consistência e usabilidade.",
   },
   {
     label: "FRONT-END",
@@ -26,22 +26,22 @@ const technicalSkillGroups = [
       "HTML",
       "CSS",
       "JavaScript",
-      "TypeScript",
-      "React",
-      "Responsive Design",
+      "Design Responsivo",
       "Componentização",
+      "React — em aprendizado",
+      "TypeScript — em aprendizado",
     ],
-    title: "Construir com propósito.",
+    title: "Construir interfaces funcionais.",
     description:
-      "Transformar decisões de design em interfaces responsivas e bem estruturadas.",
+      "Transformar decisões de design em experiências web responsivas, bem estruturadas e em evolução contínua.",
   },
   {
     label: "FERRAMENTAS",
     Icon: Wrench,
     accent: "neutral",
-    items: ["Figma", "VS Code", "Git", "GitHub", "Adobe Creative Suite", "DevTools"],
+    items: ["Figma", "Adobe XD", "Adobe Illustrator", "Adobe Photoshop", "VS Code", "IA aplicada ao processo"],
     title: "Dar forma ao processo.",
-    description: "Ferramentas para criar, desenvolver e colaborar com fluidez.",
+    description: "Ferramentas para projetar, desenvolver e organizar a entrega com mais fluidez.",
   },
 ];
 
@@ -61,7 +61,17 @@ export default function TechnicalSkills() {
             <p><TranslatedText>{description}</TranslatedText></p>
           </header>
           <ul className="skill-list">
-            {items.map((item) => <li key={item}><TranslatedText>{item}</TranslatedText></li>)}
+            {items.map((item) => {
+              const [skill, learningStatus] = item.split(" — ");
+              return (
+                <li key={item}>
+                  <TranslatedText>{skill}</TranslatedText>
+                  {learningStatus ? (
+                    <span className="skill-learning-status"> — <TranslatedText>{learningStatus}</TranslatedText></span>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         </article>
       ))}

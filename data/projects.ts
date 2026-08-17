@@ -18,11 +18,8 @@ export type Project = {
   gallery?: string[];
   galleryLayout?: "stack" | "grid";
   period: string;
-  context?: string;
-  role?: string;
-  process?: string;
-  solution?: string;
-  learnings?: string;
+  overview: string;
+  contribution: string;
   note?: string;
   status?: string;
   externalUrl?: string;
@@ -56,16 +53,12 @@ export const projects: readonly Project[] = [
     ],
     period: "2024–2025",
     status: "Projeto profissional · Concluído",
-    context:
-      "O Oráculo reunia diferentes fluxos necessários à rotina de planejamento financeiro e gestão de pessoas. O desafio era transformar informações, etapas e regras de negócio em uma experiência organizada, compreensível e eficiente para os usuários da plataforma.",
-    role:
-      "Atuei como UI/UX Designer na criação e evolução de interfaces para diferentes módulos do produto, contribuindo para a organização visual das informações, clareza de navegação e consistência da experiência entre os fluxos.",
-    process:
-      "O trabalho envolveu compreender os objetivos de cada módulo, organizar as informações prioritárias e desenhar interfaces que ajudassem os usuários a avançar pelos fluxos de maneira clara. As soluções foram evoluídas conforme as necessidades do produto e de suas diferentes jornadas.",
-    solution:
-      "Foram desenvolvidas e evoluídas experiências para diferentes frentes da plataforma, incluindo Dashboard Analítica, PDI — Plano de Desenvolvimento Individual, Avaliação de Desempenho do PN, reuniões 1:1, Seleção de Planejadores, Sistema OKR, Diagnóstico Financeiro, Plano Financeiro Completo, Pré-Momento X e Linha da Vida.",
-    learnings:
-      "A experiência reforçou a importância de estruturar sistemas com múltiplos fluxos e regras de negócio sem perder clareza. O desafio não era apenas desenhar telas, mas criar hierarquia, continuidade e contexto para diferentes momentos da jornada do usuário.",
+    overview:
+      "O Oráculo é uma plataforma digital voltada ao planejamento financeiro, criada para ajudar usuários a organizar informações, acompanhar planejamentos e compreender jornadas financeiras de forma mais clara.",
+    contribution:
+      "Atuei em UI/UX Design na evolução das interfaces do produto, contribuindo para organizar informações complexas em experiências mais intuitivas, consistentes e fáceis de navegar.",
+    note:
+      "Minha participação corresponde a uma etapa anterior da evolução do produto. O Oráculo continuou recebendo novas versões e funcionalidades posteriormente.",
   },
   {
     slug: "cresol-seguros",
@@ -73,8 +66,8 @@ export const projects: readonly Project[] = [
     category: "Produto digital · UI/UX Design · Desenvolvimento web",
     title: "Cresol Seguros",
     description:
-      "Atuação em UI/UX Design e desenvolvimento web na versão inicial do Cresol Seguros, uma solução digital para comparação, contratação e gerenciamento de seguros.",
-    technologies: ["UI Design", "UX Design", "Desenvolvimento web"],
+      "Atuação em UI/UX Design no aplicativo e na dashboard do Cresol Seguros, além de contribuições no desenvolvimento de partes web relacionadas ao produto.",
+    technologies: ["Figma", "HTML", "CSS"],
     cover: {
       tone: "orange",
       label: "Aplicativo / Versão inicial",
@@ -93,18 +86,12 @@ export const projects: readonly Project[] = [
     galleryLayout: "grid",
     period: "2022–2023",
     status: "Produto profissional · Versão inicial",
-    context:
-      "O Cresol Seguros foi desenvolvido para facilitar o acesso dos usuários a serviços de seguro em uma experiência digital mais clara e prática. Minha participação ocorreu durante a versão inicial do produto, contribuindo para a experiência das interfaces e para o desenvolvimento de partes web relacionadas à solução.",
-    role:
-      "Atuei em UI/UX Design, colaborando na construção e organização das interfaces, além de contribuir com o desenvolvimento de partes web sob minha responsabilidade.",
-    process:
-      "O trabalho envolveu transformar necessidades do produto em interfaces claras e consistentes, considerando a organização das informações, os fluxos de navegação e os diferentes pontos de contato digitais da experiência.",
-    solution:
-      "A contribuição resultou em interfaces e elementos web voltados a tornar a jornada de consulta e contratação de seguros mais compreensível e acessível para os usuários.",
-    learnings:
-      "O projeto ampliou minha experiência ao conectar decisões de UI/UX com desenvolvimento web em um produto real, reforçando a importância de consistência visual, clareza de fluxos e colaboração entre design e tecnologia.",
+    overview:
+      "O Cresol Seguros é uma solução digital voltada à consulta, contratação e gerenciamento de seguros. O produto reúne diferentes pontos de contato para tornar essa jornada mais prática e compreensível para os cooperados.",
+    contribution:
+      "Participei da versão inicial atuando no UI/UX do aplicativo e da dashboard do sistema. Também contribuí com o desenvolvimento de partes web relacionadas ao produto, sob minha responsabilidade.",
     note:
-      "Atuei na versão inicial do produto. O Cresol Seguros recebeu evoluções posteriores que não fazem parte do escopo da minha participação.",
+      "As imagens exibem telas do aplicativo da versão inicial em que participei. Os materiais da dashboard e das partes web não estão disponíveis neste portfólio.",
     externalUrl:
       "https://play.google.com/store/apps/details?id=com.br.glass.seguro_cresol",
     externalLinkLabel: "Ver na Google Play",
@@ -132,18 +119,12 @@ export const projects: readonly Project[] = [
       "/images/projects/saas-psicologia/005.png",
       "/images/projects/saas-psicologia/006.png",
     ],
-    period: "A definir",
+    period: "2024–2025",
     status: "Projeto pessoal · Conceitual",
-    context:
-      "Profissionais de psicologia precisam acompanhar informações clínicas e administrativas ao longo da jornada de cada paciente. O projeto foi desenvolvido como um exercício de produto digital para organizar esses dados em uma experiência clara, acessível e adequada à rotina profissional.",
-    role:
-      "Concepção do produto, arquitetura da informação, definição de fluxos, UI Design e prototipação das interfaces.",
-    process:
-      "A estrutura foi pensada a partir dos principais momentos da rotina de atendimento: cadastro de pacientes, acompanhamento de informações pessoais, gestão de anamneses, sessões, tarefas, documentos e financeiro. A partir desses fluxos, foram definidas hierarquias, componentes e telas para facilitar a consulta e a organização das informações.",
-    solution:
-      "Uma interface de gestão para psicólogos com lista de pacientes, ficha individual, organização de dados pessoais e médicos, gerenciamento de anamneses e recursos para comparar registros ao longo do acompanhamento.",
-    learnings:
-      "O projeto reforçou a importância de organizar informações extensas e sensíveis de forma clara, com boa hierarquia visual e acesso rápido às áreas mais importantes da rotina profissional.",
+    overview:
+      "Projeto pessoal de uma plataforma SaaS pensada para apoiar psicólogos na gestão de pacientes, anamneses, prontuários, tarefas, documentos e informações financeiras em um único ambiente.",
+    contribution:
+      "Atuei na concepção de UI/UX do produto, estruturando uma experiência que prioriza organização, clareza das informações e uma navegação adequada à rotina de profissionais da área.",
   },
   {
     slug: "cresol-fidelidade",
@@ -164,25 +145,19 @@ export const projects: readonly Project[] = [
     ],
     period: "A definir",
     status: "Projeto de produto digital",
-    context:
-      "O programa de fidelidade precisava tornar a consulta e o uso de pontos mais claros e atrativos para os cooperados. A proposta reúne o saldo disponível, o histórico de movimentações e um catálogo de recompensas em uma experiência mobile simples e alinhada à identidade da Cresol.",
-    role:
-      "Estruturação da experiência, arquitetura da informação, definição dos principais fluxos, UI Design e prototipação das telas do aplicativo.",
-    process:
-      "As jornadas foram organizadas a partir das principais necessidades do usuário: acessar sua conta, consultar a pontuação, entender como os pontos foram acumulados, pesquisar recompensas por categoria e localização e visualizar os detalhes antes do resgate.",
-    solution:
-      "Um aplicativo de fidelidade com painel de pontuação, histórico, busca e filtros, categorias de benefícios, recomendações personalizadas e páginas detalhadas para o resgate de brindes e experiências.",
-    learnings:
-      "O projeto reforçou a importância de comunicar saldo, valor e disponibilidade com clareza, além de reduzir etapas entre a descoberta de um benefício e sua decisão de resgate.",
+    overview:
+      "O Cresol Fidelidade é um aplicativo voltado à transformação de pontos acumulados em brindes, benefícios e experiências para cooperados, reunindo informações e opções de resgate em uma experiência digital.",
+    contribution:
+      "Atuei em UI/UX Design, contribuindo para a organização das interfaces e dos fluxos de navegação relacionados à consulta de pontos, benefícios e possibilidades de resgate.",
   },
   {
     slug: "powergo",
     number: "05",
     category: "Produto digital · UI/UX Design · Desenvolvimento web",
-    title: "PowerGO",
+    title: "Go Plataforma - PowerGO",
     description:
-      "Atuação em UI/UX Design e no desenvolvimento da versão inicial do PowerGO, um aplicativo voltado ao apoio de equipes comerciais e à gestão de pedidos, além de algumas páginas web relacionadas ao produto.",
-    technologies: [],
+      "Atuação em UI/UX Design na versão inicial do PowerGO e no desenvolvimento de algumas páginas web relacionadas ao produto com HTML e CSS.",
+    technologies: ["Figma", "Desenvolvimento web", "HTML", "CSS"],
     cover: {
       tone: "orange",
       label: "Aplicativo mobile / V1",
@@ -197,18 +172,12 @@ export const projects: readonly Project[] = [
     galleryLayout: "grid",
     period: "2023–2024",
     status: "Produto profissional · Versão inicial",
-    context:
-      "O PowerGO é uma solução digital voltada à operação comercial de distribuidoras. Minha participação ocorreu em UI/UX Design e no desenvolvimento da versão inicial do aplicativo, contribuindo para transformar interfaces e fluxos definidos pelo produto em uma experiência funcional para os usuários, além do desenvolvimento de algumas páginas web relacionadas ao produto.",
-    role:
-      "Atuei em UI/UX Design e no desenvolvimento front-end da V1 do aplicativo, implementando as interfaces e os fluxos sob minha responsabilidade. Também desenvolvi algumas páginas web relacionadas ao produto, sem participação nas evoluções posteriores ou no desenvolvimento de todo o site atual.",
-    process:
-      "O trabalho envolveu projetar e desenvolver as telas e componentes previstos para a versão inicial, considerando a organização das informações e a experiência de uso em dispositivos móveis, além de implementar algumas páginas web relacionadas ao produto.",
-    solution:
-      "A versão inicial do aplicativo reuniu recursos para apoiar a rotina comercial e a gestão de pedidos, com interfaces voltadas à consulta de informações e execução de tarefas em campo.",
-    learnings:
-      "O projeto ampliou minha experiência no desenvolvimento de interfaces para um produto real, reforçando a importância de consistência visual, organização de componentes e atenção aos fluxos de uso no mobile.",
+    overview:
+      "O PowerGO é uma solução digital voltada ao apoio de equipes comerciais e à gestão de pedidos, com recursos que apoiam a rotina de vendas e a consulta de informações em campo.",
+    contribution:
+      "Participei da versão inicial do produto em UI/UX Design, contribuindo para a experiência das interfaces do aplicativo. Também atuei no desenvolvimento de algumas páginas web relacionadas ao produto com HTML e CSS.",
     note:
-      "As imagens apresentam materiais promocionais da versão inicial do aplicativo, período em que participei do projeto.",
+      "Os materiais exibidos apresentam a versão inicial do aplicativo, período em que participei do projeto. O PowerGO continuou evoluindo posteriormente com novas versões e funcionalidades.",
     externalUrl: "https://powergo.com.br/",
   },
   {
@@ -232,16 +201,10 @@ export const projects: readonly Project[] = [
     ],
     period: "2023",
     status: "Finalizado",
-    context:
-      "A compra e a venda de itens ligados ao agronegócio envolvem diferentes categorias, perfis de anunciante e necessidades de localização. O BRX Agro foi pensado como uma plataforma de classificados especializada nesse mercado, reunindo anúncios relevantes em uma experiência simples e direcionada.",
-    role:
-      "Concepção da experiência, organização dos fluxos, arquitetura da informação, UI Design e prototipação das principais jornadas do aplicativo.",
-    process:
-      "O projeto foi estruturado a partir das jornadas de quem procura e de quem anuncia. Foram desenhados fluxos de acesso, busca, filtros por categoria e localização, visualização de detalhes, favoritos, contato com o anunciante e criação de novos anúncios com diferentes opções de destaque.",
-    solution:
-      "Um marketplace mobile que conecta compradores e vendedores do setor agro, com navegação por categorias, pesquisa regional, páginas detalhadas de anúncio e um fluxo guiado para publicação e promoção de ofertas.",
-    learnings:
-      "O projeto reforçou a importância de equilibrar variedade de categorias e simplicidade de navegação, além de deixar claros os dados essenciais para que compradores e anunciantes avancem com segurança durante a negociação.",
+    overview:
+      "O BRX Agro é um marketplace voltado ao agronegócio, desenvolvido para facilitar a divulgação, a compra e a venda de produtos, serviços, máquinas, animais e propriedades rurais.",
+    contribution:
+      "Atuei em UI/UX Design, contribuindo para a organização das interfaces e da experiência de navegação de uma plataforma com diferentes categorias e tipos de oferta.",
   },
 ];
 

@@ -37,11 +37,8 @@ export default async function CasePage({ params }: CasePageProps) {
   if (!project) notFound();
 
   const optionalSections = [
-    { title: "projects.context", content: project.context },
-    { title: "projects.role", content: project.role },
-    { title: "projects.process", content: project.process },
-    { title: "projects.solution", content: project.solution },
-    { title: "projects.learnings", content: project.learnings },
+    { title: "projects.overview", content: project.overview },
+    { title: "projects.contribution", content: project.contribution },
     { title: "projects.note", content: project.note },
   ].filter(({ content }) => Boolean(content));
 

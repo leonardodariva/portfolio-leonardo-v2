@@ -26,6 +26,8 @@ const heroSocialLinks = [
   },
 ];
 
+const workflowSteps = ["understand", "structure", "build", "refine"] as const;
+
 export default function Home() {
   return (
     <main>
@@ -119,6 +121,10 @@ export default function Home() {
                 <T id="home.aboutText" />
               </p>
             </div>
+            <div className="about-ai">
+              <span><T id="home.aboutAiLabel" /></span>
+              <p><T id="home.aboutAiText" /></p>
+            </div>
             <div className="about-tags">
               <span>UI/UX Design</span>
               <span>Figma</span>
@@ -135,6 +141,22 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+      <section className="work-method shell" aria-labelledby="work-method-title">
+        <header className="work-method-heading">
+          <h2 id="work-method-title"><T id="workflow.title" /></h2>
+        </header>
+        <ol className="work-method-grid">
+          {workflowSteps.map((step, index) => (
+            <li className="work-method-card" key={step}>
+              <span className="work-method-number">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3><T id={`workflow.steps.${step}.title`} /></h3>
+                <p><T id={`workflow.steps.${step}.description`} /></p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </section>
       <section className="work shell" id="projetos">
         <div className="section-head">
@@ -157,11 +179,7 @@ export default function Home() {
           <span className="footer-label"><T id="home.contactLabel" /></span>
           <div className="contact-layout">
             <div className="contact-heading">
-              <h2>
-                <T id="home.contact1" />
-                <br />
-                <em><T id="home.contact2" /></em>
-              </h2>
+              <h2><T id="home.contact1" /></h2>
               <p>
                 <T id="home.contactText" />
               </p>
