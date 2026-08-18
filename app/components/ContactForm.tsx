@@ -54,7 +54,7 @@ export default function ContactForm() {
       new FormData(form).forEach((value, key) => body.append(key, String(value)));
       body.set("form-name", "contato");
 
-      const response = await fetch("/", {
+      const response = await fetch("/netlify-form.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: body.toString(),
@@ -99,6 +99,7 @@ export default function ContactForm() {
       className="contact-form"
       name="contato"
       method="POST"
+      action="/netlify-form.html"
       data-netlify="true"
       netlify-honeypot="bot-field"
       onSubmit={submit}
