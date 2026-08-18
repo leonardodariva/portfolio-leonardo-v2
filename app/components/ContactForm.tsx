@@ -7,10 +7,17 @@ import { useLocale } from "../i18n";
 type FieldName = "name" | "email" | "message";
 type FieldErrors = Partial<Record<FieldName, string>>;
 
+const submittedFieldNames: Record<FieldName, string> = {
+  name: "nome",
+  email: "email",
+  message: "mensagem",
+};
+
 export default function ContactForm() {
   const { t } = useLocale();
   const [errors, setErrors] = useState<FieldErrors>({});
   const [feedback, setFeedback] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -24,31 +31,54 @@ export default function ContactForm() {
     const fields = form.elements.namedItem.bind(form.elements);
 
     (["name", "email", "message"] as FieldName[]).forEach((name) => {
-      const field = fields(name) as HTMLInputElement | HTMLTextAreaElement;
+      const field = fields(submittedFieldNames[name]) as HTMLInputElement | HTMLTextAreaElement;
       if (!field.validity.valid) nextErrors[name] = t(`form.${name}Error`);
     });
 
     return nextErrors;
   }
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const nextErrors = validate(event.currentTarget);
+    const form = event.currentTarget;
+    const nextErrors = validate(form);
     setErrors(nextErrors);
     setFeedback("");
 
     if (Object.keys(nextErrors).length) return;
 
-    setFeedback(t("form.feedback"));
-    if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
-    feedbackTimer.current = setTimeout(() => setFeedback(""), 6000);
+    setIsSubmitting(true);
+
+    try {
+      const body = new URLSearchParams();
+      new FormData(form).forEach((value, key) => body.append(key, String(value)));
+      body.set("form-name", "contato");
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+
+      if (!response.ok) throw new Error("Contact form submission failed");
+
+      form.reset();
+      setErrors({});
+      setFeedback(t("form.success"));
+    } catch {
+      setFeedback(t("form.error"));
+    } finally {
+      setIsSubmitting(false);
+      if (feedbackTimer.current) clearTimeout(feedbackTimer.current);
+      feedbackTimer.current = setTimeout(() => setFeedback(""), 6000);
+    }
   }
 
   function clearValidError(
+    name: FieldName,
     event: FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const field = event.currentTarget;
-    const name = field.name as FieldName;
     if (errors[name] && field.validity.valid) {
       setErrors((current) => ({ ...current, [name]: undefined }));
     }
@@ -57,15 +87,28 @@ export default function ContactForm() {
   function fieldProps(name: FieldName) {
     const hasError = Boolean(errors[name]);
     return {
-      name,
+      name: submittedFieldNames[name],
       "aria-invalid": hasError,
       "aria-describedby": hasError ? `${name}-error` : undefined,
-      onInput: clearValidError,
+      onInput: (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => clearValidError(name, event),
     };
   }
 
   return (
-    <form className="contact-form" onSubmit={submit} noValidate>
+    <form
+      className="contact-form"
+      name="contato"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      onSubmit={submit}
+      noValidate
+    >
+      <input type="hidden" name="form-name" value="contato" />
+      <p className="netlify-honeypot" aria-hidden="true">
+        <label htmlFor="contact-bot-field">Não preencha este campo</label>
+        <input id="contact-bot-field" name="bot-field" tabIndex={-1} autoComplete="off" />
+      </p>
       <div className="form-grid">
         <div className="field">
           <label htmlFor="contact-name">{t("form.name")}</label>
@@ -87,7 +130,7 @@ export default function ContactForm() {
           </label>
           <input
             id="contact-company"
-            name="company"
+            name="empresa"
             placeholder={t("form.companyPlaceholder")}
           />
         </div>
@@ -123,8 +166,8 @@ export default function ContactForm() {
         </div>
       </div>
       <div className="form-actions">
-        <button className="primary-action contact-submit" type="submit">
-          {t("form.submit")} <Send aria-hidden="true" size={15} />
+        <button className="primary-action contact-submit" type="submit" disabled={isSubmitting}>
+          {t(isSubmitting ? "form.sending" : "form.submit")} <Send aria-hidden="true" size={15} />
         </button>
       </div>
       <p className="contact-form-feedback" role="status" aria-live="polite">

@@ -38,7 +38,7 @@ const technicalSkillGroups = [
     label: "FERRAMENTAS",
     Icon: Wrench,
     accent: "neutral",
-    items: ["Figma", "Adobe XD", "Adobe Illustrator", "Adobe Photoshop", "VS Code", "IA aplicada ao processo"],
+    items: ["Figma", "Adobe XD", "Adobe Illustrator", "Adobe Photoshop", "VS Code", "Git", "GitHub", "IA aplicada ao processo"],
     title: "Dar forma ao processo.",
     description: "Ferramentas para projetar, desenvolver e organizar a entrega com mais fluidez.",
   },

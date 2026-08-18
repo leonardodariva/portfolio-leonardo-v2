@@ -2,7 +2,6 @@ import { ArrowDown, ArrowRight, Send } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaLinkedin } from "react-icons/fa6";
-import { SiGithub } from "react-icons/si";
 import { projects } from "../data/projects";
 import ContactForm from "./components/ContactForm";
 import ProjectGrid from "./components/ProjectGrid";
@@ -14,11 +13,6 @@ import { T } from "./i18n";
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
 const heroSocialLinks = [
-  {
-    label: "GitHub",
-    href: "https://github.com/leonardodariva",
-    Icon: SiGithub,
-  },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/leonardo-dariva/",
@@ -60,7 +54,7 @@ export default function Home() {
                     className="hero-action-social"
                     href={href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     aria-label={`${label} de Leonardo Dariva`}
                     title={label}
                     key={label}

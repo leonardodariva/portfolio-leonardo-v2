@@ -3,13 +3,13 @@ import Link from "next/link";
 import {
   BriefcaseBusiness,
   Code2,
-  Download,
   GraduationCap,
   MessageSquare,
   UserRound,
 } from "lucide-react";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
+import ResumeDownloadButton from "../components/ResumeDownloadButton";
 import { T, TranslatedText } from "../i18n";
 
 export const metadata: Metadata = {
@@ -111,6 +111,8 @@ const resumeSkillGroups = [
       "Adobe Illustrator",
       "Adobe Photoshop",
       "VS Code",
+      "Git",
+      "GitHub",
       "IA aplicada ao processo",
     ],
   },
@@ -173,28 +175,15 @@ export default function Curriculo() {
               aria-label="Perfis profissionais"
             >
               <a
-                href="https://github.com/leonardodariva"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-              <a
                 href="https://www.linkedin.com/in/leonardo-dariva/"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
                 LinkedIn
               </a>
             </div>
           </div>
-          <a
-            className="resume-download"
-            href="/curriculo-leonardo-dariva.pdf"
-            download
-          >
-            <T id="resume.download" /> <Download aria-hidden="true" size={16} />
-          </a>
+          <ResumeDownloadButton />
         </div>
       </header>
 

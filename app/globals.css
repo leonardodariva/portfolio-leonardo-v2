@@ -477,10 +477,17 @@ button:active {
 .work-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 58px 24px;
+  gap: 64px 30px;
+}
+.card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
 }
 .project-card-image-link {
   display: block;
+  overflow: hidden;
+  border-radius: 7px 7px 0 0;
   color: inherit;
 }
 .project-card-image-link:focus-visible {
@@ -573,14 +580,16 @@ button:active {
   font: 500 12px var(--font-mono);
   letter-spacing: 0.08em;
   color: #83868b;
-  margin-top: 18px;
+  margin-top: 0;
+  padding: 18px 18px 0;
 }
 .card h3 {
   font-size: 25px;
   letter-spacing: -0.035em;
-  margin: 18px 0 10px;
+  margin: 18px 18px 0;
 }
 .card > p {
+  margin: 12px 18px 0;
   color: #71747a;
   font-size: 14px;
   line-height: 1.5;
@@ -590,8 +599,8 @@ button:active {
   display: flex;
   justify-content: space-between;
   border-top: 1px solid var(--line);
-  margin-top: 24px;
-  padding-top: 17px;
+  margin: 24px 18px 0;
+  padding: 17px 0 18px;
   font: 500 12px var(--font-mono);
   color: #85888d;
   align-items: center;
@@ -649,17 +658,11 @@ button:active {
   border: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
   border-radius: 16px;
   background: var(--paper);
-  box-shadow:
-    0 16px 34px color-mix(in srgb, var(--ink) 9%, transparent),
-    0 2px 8px color-mix(in srgb, var(--ink) 5%, transparent);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  transition: transform 0.22s ease;
 }
 @media (hover: hover) {
   .work-method-card:hover {
     transform: translateY(-4px);
-    box-shadow:
-      0 20px 42px color-mix(in srgb, var(--ink) 12%, transparent),
-      0 3px 10px color-mix(in srgb, var(--ink) 6%, transparent);
   }
 }
 .work-method-number {
@@ -804,7 +807,7 @@ button:active {
   }
   .work-grid {
     grid-template-columns: 1fr;
-    gap: 56px;
+    gap: 60px;
   }
   .card-image {
     height: 300px;
@@ -851,9 +854,10 @@ button:active {
 .hero .eyebrow {
   width: fit-content;
   padding: 10px 14px;
+  border: 1px solid color-mix(in srgb, var(--acid) 38%, transparent);
   border-radius: 5px;
-  background: color-mix(in srgb, var(--acid) 10%, var(--paper));
-  color: color-mix(in srgb, var(--ink) 70%, var(--muted));
+  background: color-mix(in srgb, var(--acid) 20%, var(--paper));
+  color: var(--ink);
   font-size: 12px;
 }
 .hero .eyebrow i {
@@ -1298,6 +1302,14 @@ a.secondary-action:focus-visible,
   padding: clamp(28px, 3vw, 40px);
   box-shadow: 0 22px 60px var(--contact-panel-shadow);
 }
+.netlify-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
 .contact .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1391,6 +1403,10 @@ a.secondary-action:focus-visible,
 .contact-submit:focus-visible {
   outline: 2px solid var(--purple);
   outline-offset: 3px;
+}
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 .contact-form-feedback {
   min-height: 0;
@@ -1788,6 +1804,12 @@ html[data-theme="dark"] .header nav a:not(:hover) {
 html[data-theme="dark"] .locale-selector-trigger {
   color: #fff;
 }
+html[data-theme="dark"] .locale-selector-trigger:hover {
+  border-color: transparent;
+}
+html[data-theme="dark"] .theme-toggle:hover {
+  border-color: transparent;
+}
 html[data-theme="dark"] .hero-bottom p,
 html[data-theme="dark"] .card > p,
 html[data-theme="dark"] .about-cols {
@@ -1925,10 +1947,23 @@ html[data-theme="dark"] .is-scrolled .header {
   background: var(--acid);
   color: var(--contact-action-ink);
   font: 650 13px var(--font-inter);
+  cursor: pointer;
   transition: background 0.22s;
 }
-.resume-download:hover {
+.resume-download:hover:not(:disabled) {
   background: color-mix(in srgb, var(--acid) 82%, var(--contact-action-ink));
+}
+.resume-download:disabled {
+  cursor: wait;
+  opacity: 0.82;
+}
+.resume-download-spinner {
+  animation: resume-download-spin 0.8s linear infinite;
+}
+@keyframes resume-download-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 .resume-skill-tags {
   display: flex;
@@ -2452,6 +2487,67 @@ html[data-theme="dark"] .is-scrolled .header {
   }
   .resume-experience-period {
     white-space: normal;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+  }
+  .hero-layout {
+    gap: 0;
+  }
+  .hero-visual {
+    display: none;
+  }
+  .about-content {
+    gap: 0;
+  }
+  .about-main {
+    display: contents;
+  }
+  .about-main .big-copy {
+    order: 1;
+  }
+  .about-portrait {
+    order: 2;
+    margin-bottom: 32px;
+  }
+  .about-cols {
+    order: 3;
+  }
+  .about-ai {
+    order: 4;
+  }
+  .about-tags {
+    order: 5;
+  }
+  .about-actions {
+    order: 6;
+    width: 100%;
+  }
+  .about-actions > a {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .work .section-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .work .section-link {
+    min-height: 44px;
+    align-self: flex-end;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 0 14px;
+    background: transparent;
+  }
+  .work .section-link:focus-visible {
+    outline: 2px solid var(--purple);
+    outline-offset: 3px;
   }
 }
 
